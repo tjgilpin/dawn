@@ -2518,7 +2518,8 @@
           },
           "options__5": {
             "label": "Akcent 2"
-          }
+          },
+          "info": "Widoczny, gdy układ jest ustawiony na Wiersz lub Kontener sekcji."
         }
       },
       "blocks": {
