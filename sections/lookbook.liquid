@@ -1,0 +1,376 @@
+<script src="{{ 'popper.min.js' | asset_url }}" defer="defer"></script>
+<script src="{{ 'lookbook.js' | asset_url }}" defer="defer"></script>
+
+<section class="container mx-auto bg-{{ section.settings.section_background_color }} m-{{ section.settings.section_margin }} p-{{ section.settings.section_padding }}">
+  <div class="grid grid-cols-6">
+
+  {% liquid
+    assign first_colspan = 6
+    assign second_colspan = 0
+    assign product = section.settings.product
+
+    for block in section.blocks
+      if block.type == 'separator'
+        assign first_colspan = block.settings.first_colspan
+        assign second_colspan = 6 | minus: first_colspan
+      endif
+    endfor
+  %}
+
+    <div class="col-span-{{ first_colspan }}">
+      {%- for block in section.blocks -%}
+        {%- case block.type -%}
+          {%- when 'image' -%}
+
+            {%- for media in product.media limit: 1 -%}
+              {%- if media.media_type == 'image' -%}
+                <div class="lookbook-image relative">
+                  <img
+                    srcset="{%- if media.preview_image.width >= 550 -%}{{ media.preview_image | image_url: '550x' }} 550w,{%- endif -%}
+                            {%- if media.preview_image.width >= 1100 -%}{{ media.preview_image | image_url: '1100x' }} 1100w,{%- endif -%}
+                            {%- if media.preview_image.width >= 1680 -%}{{ media.preview_image | image_url: '1680x' }} 1680w,{%- endif -%}
+                            {%- if media.preview_image.width >= 2048 -%}{{ media.preview_image | image_url: '2048x' }} 2048w,{%- endif -%}
+                            {%- if media.preview_image.width >= 4096 -%}{{ media.preview_image | image_url: '4096x' }} 4096w{%- endif -%}"
+                    sizes="(min-width: 550px) calc(100vw - 12rem), 100vw"
+                    src="{{ media.preview_image | image_url: '550x' }}"
+                    alt="{{ media.alt | escape }}"
+                    loading="lazy"
+                    width="1100"
+                    height="{{ 1100 | divided_by: media.preview_image.aspect_ratio | ceil }}"
+                    data-media-id="{{ media.id }}"
+                  />
+                  {% liquid
+                    assign tooltip_id = block.id 
+                  %}
+
+                  <a
+                    class="lookbook-tooltip-button cursor-pointer left-{{ block.settings.x_position }}/20 top-{{ block.settings.y_position }}/20 text-6 bg-primary p-1 w-3px h-3px hover:bg-background-primary border-text-primary rounded-lg border-3 absolute block"
+                    onclick="openPopover(event,'{{ tooltip_id }}')"
+                  >
+                  </a>
+                  <div id="{{ tooltip_id }}" class="lookbook-tooltip hidden bg-background-primary mb-3 block z-50 text-xs border-bottom border-primary">
+                    <div class="center block py-4 mb-2 px-5 relative w-200px h-30px transition transform duration-200 ease-in-out">
+                      <h6 class="text-xs text-text-secondary uppercase">{{ product.title }}</h6>
+                      <div class="block w-full mt-6">
+                        <a href={{ product.url }} class="text-xs bg-primary p-2 rounded uppercase text-text-primary">
+                          Shop Now
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              {%- endif -%}
+            {%- endfor -%}
+          {%- when 'product_title' -%}
+            <h3 class="m-{{ block.settings.margin }} p-{{ block.settings.padding }} text-{{ block.settings.font_size }} text-{{ block.settings.color }}">{{ product.title }}</h3>
+          {%- when 'product_description' -%}
+            <div class="m-{{ block.settings.margin }} p-{{ block.settings.padding }} text-{{ block.settings.font_size }} text-{{ block.settings.color }}">{{ product.description }}</div>
+          {%- when 'separator' -%}
+          </div><div class="col-span-{{ second_colspan }} {%- if block.settings.border -%} border-l {%- endif -%}">
+        {%- endcase -%}
+      {%- endfor -%}
+    </div>
+  </div>
+
+</section>
+
+{% schema %}
+{
+  "name": "t:sections.lookbook.name",
+  "class": "spaced-section",
+  "settings": [
+    {
+      "type": "product",
+      "id": "product",
+      "label": "t:sections.common.settings.product.label"
+    },
+    {
+      "type": "select",
+      "id": "section_background_color",
+      "default": "transparent",
+      "label": "t:sections.common.settings.background_color.label",
+      "options": [
+        {
+          "value": "transparent",
+          "label": "t:settings_schema.colors.settings.color_transparent.label"
+        },
+        {
+          "value": "primary",
+          "label": "t:settings_schema.colors.settings.color_primary.label"
+        },
+        {
+          "value": "secondary",
+          "label": "t:settings_schema.colors.settings.color_secondary.label"
+        },
+        {
+          "value": "accent",
+          "label": "t:settings_schema.colors.settings.color_accent.label"
+        },
+        {
+          "value": "background-primary",
+          "label": "t:settings_schema.colors.settings.color_background_primary.label"
+        },
+        {
+          "value": "background-secondary",
+          "label": "t:settings_schema.colors.settings.color_background_secondary.label"
+        },
+        {
+          "value": "text-primary",
+          "label": "t:settings_schema.colors.settings.color_text_primary.label"
+        },
+        {
+          "value": "text-secondary",
+          "label": "t:settings_schema.colors.settings.color_text_secondary.label"
+        },
+        {
+          "value": "border",
+          "label": "t:settings_schema.colors.settings.color_border.label"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "section_margin",
+      "min": 0,
+      "max": 12,
+      "step": 1,
+      "default": 0,
+      "label": "t:sections.common.settings.margin.label"
+    },
+    {
+      "type": "range",
+      "id": "section_padding",
+      "min": 0,
+      "max": 12,
+      "step": 1,
+      "default": 4,
+      "label": "t:sections.common.settings.padding.label"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "image",
+      "name": "t:sections.lookbook.blocks.image.name",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "range",
+          "id": "x_position",
+          "min": 0,
+          "max": 20,
+          "step": 1,
+          "default": 10,
+          "label": "t:sections.common.settings.x_position.label"
+        },
+        {
+          "type": "range",
+          "id": "y_position",
+          "min": 0,
+          "max": 20,
+          "step": 1,
+          "default": 10,
+          "label": "t:sections.common.settings.y_position.label"
+        },
+        {
+          "type": "range",
+          "id": "padding",
+          "min": 0,
+          "max": 12,
+          "step": 1,
+          "default": 4,
+          "label": "t:sections.common.settings.padding.label"
+        }
+      ]
+    },
+    {
+      "type": "product_title",
+      "name": "t:sections.lookbook.blocks.product_title.name",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "range",
+          "id": "font_size",
+          "min": 1,
+          "max": 8,
+          "step": 1,
+          "default": 2,
+          "label": "t:sections.common.settings.font_size.label"
+        },
+        {
+          "type": "select",
+          "id": "color",
+          "default": "primary",
+          "label": "t:sections.common.settings.color.label",
+          "options": [
+            {
+              "value": "primary",
+              "label": "t:settings_schema.colors.settings.color_primary.label"
+            },
+            {
+              "value": "secondary",
+              "label": "t:settings_schema.colors.settings.color_secondary.label"
+            },
+            {
+              "value": "accent",
+              "label": "t:settings_schema.colors.settings.color_accent.label"
+            },
+            {
+              "value": "background-primary",
+              "label": "t:settings_schema.colors.settings.color_background_primary.label"
+            },
+            {
+              "value": "background-secondary",
+              "label": "t:settings_schema.colors.settings.color_background_secondary.label"
+            },
+            {
+              "value": "text-primary",
+              "label": "t:settings_schema.colors.settings.color_text_primary.label"
+            },
+            {
+              "value": "text-secondary",
+              "label": "t:settings_schema.colors.settings.color_text_secondary.label"
+            },
+            {
+              "value": "border",
+              "label": "t:settings_schema.colors.settings.color_border.label"
+            }
+          ]
+        },
+        {
+          "type": "range",
+          "id": "margin",
+          "min": 0,
+          "max": 12,
+          "step": 1,
+          "default": 0,
+          "label": "t:sections.common.settings.margin.label"
+        },
+        {
+          "type": "range",
+          "id": "padding",
+          "min": 0,
+          "max": 12,
+          "step": 1,
+          "default": 4,
+          "label": "t:sections.common.settings.padding.label"
+        }
+      ]
+    },
+    {
+      "type": "product_description",
+      "name": "t:sections.lookbook.blocks.product_description.name",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "range",
+          "id": "font_size",
+          "min": 1,
+          "max": 8,
+          "step": 1,
+          "default": 2,
+          "label": "t:sections.common.settings.font_size.label"
+        },
+        {
+          "type": "select",
+          "id": "color",
+          "default": "primary",
+          "label": "t:sections.common.settings.color.label",
+          "options": [
+            {
+              "value": "primary",
+              "label": "t:settings_schema.colors.settings.color_primary.label"
+            },
+            {
+              "value": "secondary",
+              "label": "t:settings_schema.colors.settings.color_secondary.label"
+            },
+            {
+              "value": "accent",
+              "label": "t:settings_schema.colors.settings.color_accent.label"
+            },
+            {
+              "value": "background-primary",
+              "label": "t:settings_schema.colors.settings.color_background_primary.label"
+            },
+            {
+              "value": "background-secondary",
+              "label": "t:settings_schema.colors.settings.color_background_secondary.label"
+            },
+            {
+              "value": "text-primary",
+              "label": "t:settings_schema.colors.settings.color_text_primary.label"
+            },
+            {
+              "value": "text-secondary",
+              "label": "t:settings_schema.colors.settings.color_text_secondary.label"
+            },
+            {
+              "value": "border",
+              "label": "t:settings_schema.colors.settings.color_border.label"
+            }
+          ]
+        },
+        {
+          "type": "range",
+          "id": "margin",
+          "min": 0,
+          "max": 12,
+          "step": 1,
+          "default": 0,
+          "label": "t:sections.common.settings.margin.label"
+        },
+        {
+          "type": "range",
+          "id": "padding",
+          "min": 0,
+          "max": 12,
+          "step": 1,
+          "default": 4,
+          "label": "t:sections.common.settings.padding.label"
+        }
+      ]
+    },
+    {
+      "type": "separator",
+      "name": "t:sections.common.blocks.separator.name",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "t:sections.common.blocks.separator.settings.description.content"
+        },
+        {
+          "id": "first_colspan",
+          "type": "range",
+          "min": 1,
+          "max": 5,
+          "default": 3,
+          "label": "t:sections.common.blocks.separator.settings.first_colspan.label"
+        },
+        {
+          "id": "border",
+          "default": true,
+          "type": "checkbox",
+          "label": "t:sections.common.blocks.separator.settings.border.label"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.lookbook.presets.name",
+      "blocks": [
+        {
+          "type": "image"
+        },
+        {
+          "type": "separator"
+        },
+        {
+          "type": "product_title"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

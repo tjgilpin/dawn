@@ -2,97 +2,67 @@
 {{ 'component-loading-overlay.css' | asset_url | stylesheet_tag }}
 {{ 'component-card.css' | asset_url | stylesheet_tag }}
 {{ 'component-price.css' | asset_url | stylesheet_tag }}
+{{ 'component-product-grid.css' | asset_url | stylesheet_tag }}
 
 <link rel="preload" href="{{ 'component-rte.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
 
 <noscript>{{ 'component-rte.css' | asset_url | stylesheet_tag }}</noscript>
 
-{%- style -%}
-  .section-{{ section.id }}-padding {
-    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
-    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
-  }
+{%- if section.settings.enable_filtering or section.settings.enable_sorting -%}
+  {{ 'component-facets.css' | asset_url | stylesheet_tag }}
+  <script src="{{ 'facets.js' | asset_url }}" defer="defer"></script>
 
-  @media screen and (min-width: 750px) {
-    .section-{{ section.id }}-padding {
-      padding-top: {{ section.settings.padding_top }}px;
-      padding-bottom: {{ section.settings.padding_bottom }}px;
-    }
-  }
-{%- endstyle -%}
-
-<div class="section-{{ section.id }}-padding">
-  {%- if section.settings.enable_filtering or section.settings.enable_sorting -%}
-    {{ 'component-facets.css' | asset_url | stylesheet_tag }}
-    <script src="{{ 'facets.js' | asset_url }}" defer="defer"></script>
-  
-    <div class="page-width" id="main-collection-filters" data-id="{{ section.id }}">
-      {% render 'facets', results: collection, enable_filtering: section.settings.enable_filtering, enable_sorting: section.settings.enable_sorting, collapse_on_larger_devices: section.settings.collapse_on_larger_devices %}
-    </div>
-  {%- endif -%}
-  
-  <div id="ProductGridContainer">
-    {%- paginate collection.products by section.settings.products_per_page -%}
-      {%- if collection.products.size == 0 -%}
-        <div class="collection collection--empty page-width" id="product-grid" data-id="{{ section.id }}">
-          <div class="loading-overlay gradient"></div>
-          <div class="title-wrapper center">
-            <h2 class="title title--primary">
-              {{ 'sections.collection_template.empty' | t }}<br>
-              {{ 'sections.collection_template.use_fewer_filters_html' | t: link: collection.url, class: "underlined-link link" }}
-            </h2>
-          </div>
-        </div>
-      {%- else -%}
-        <div class="collection page-width">
-          <div class="loading-overlay gradient"></div>
-  
-          <ul id="product-grid" data-id="{{ section.id }}" class="
-            grid grid--2-col product-grid
-            {% if collection.products_count < 4 %} grid--{{ collection.products_count }}-col-tablet{% else %}
-              {% if collection.products_count == 4 %} grid--4-col-desktop{% else %} grid--3-col-tablet grid--one-third-max grid--4-col-desktop grid--quarter-max{% endif %}
-            {% endif %}">
-            {%- for product in collection.products -%}
-              {% assign lazy_load = false %}
-              {%- if forloop.index > 2 -%}
-                {%- assign lazy_load = true -%}
-              {%- endif -%}
-
-              <li class="grid__item">
-                {% render 'card-product',
-                  card_product: product,
-                  media_aspect_ratio: section.settings.image_ratio,
-                  show_secondary_image: section.settings.show_secondary_image,
-                  show_vendor: section.settings.show_vendor,
-                  show_rating: section.settings.show_rating,
-                  lazy_load: lazy_load
-                %}
-              </li>
-            {%- endfor -%}
-          </ul>
-  
-          {%- if paginate.pages > 1 -%}
-            {% render 'pagination', paginate: paginate, anchor: '' %}
-          {%- endif -%}
-        </div>
-      {%- endif -%}
-    {%- endpaginate -%}
+  <div class="page-width" id="main-collection-filters" data-id="{{ section.id }}">
+    {% render 'facets', results: collection, enable_filtering: section.settings.enable_filtering, enable_sorting: section.settings.enable_sorting, collapse_on_larger_devices: section.settings.collapse_on_larger_devices %}
   </div>
+{%- endif -%}
+
+<div id="ProductGridContainer">
+  {%- paginate collection.products by section.settings.limit -%}
+    {%- if collection.products.size == 0 -%}
+      <div class="collection collection--empty page-width" id="product-grid" data-id="{{ section.id }}">
+        <div class="loading-overlay gradient"></div>
+        <div class="title-wrapper center">
+          <h2 class="title title--primary">
+            {{ 'sections.collection_template.empty' | t }}<br>
+            {{ 'sections.collection_template.use_fewer_filters_html' | t: link: collection.url, class: "underlined-link link" }}
+          </h2>
+        </div>
+      </div>
+    {%- else -%}
+      <div class="collection page-width">
+        <div class="loading-overlay gradient"></div>
+
+        {% render 'grid',
+          section: section,
+          items: collection.products,
+          type: 'product',
+          count: collection.products_count
+        %}
+
+        {%- if paginate.pages > 1 -%}
+          {% render 'pagination', paginate: paginate, anchor: '' %}
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+  {%- endpaginate -%}
 </div>
 
 {% schema %}
 {
   "name": "t:sections.main-collection-product-grid.name",
-  "class": "section",
+  "class": "spaced-section collection-grid-section",
   "settings": [
     {
-      "type": "range",
-      "id": "products_per_page",
-      "min": 8,
-      "max": 24,
-      "step": 4,
-      "default": 16,
-      "label": "t:sections.main-collection-product-grid.settings.products_per_page.label"
+      "type": "text",
+      "id": "heading",
+      "default": "Featured collection",
+      "label": "t:sections.common.settings.heading.label"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "t:sections.common.settings.subheading.label"
     },
     {
       "type": "header",
@@ -126,16 +96,22 @@
     },
     {
       "type": "checkbox",
-      "id": "show_vendor",
+      "id": "add_image_padding",
       "default": false,
-      "label": "t:sections.main-collection-product-grid.settings.show_vendor.label"
+      "label": "t:sections.main-collection-product-grid.settings.add_image_padding.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_image_outline",
+      "default": true,
+      "label": "t:sections.common.settings.show_image_outline.label"
     },
     {
       "type": "checkbox",
       "id": "show_rating",
       "default": false,
-      "label": "t:sections.main-collection-product-grid.settings.show_rating.label",
-      "info": "t:sections.main-collection-product-grid.settings.show_rating.info"
+      "label": "t:sections.common.settings.show_rating.label",
+      "info": "t:sections.common.settings.show_rating.info"
     },
     {
       "type": "header",
@@ -155,34 +131,433 @@
       "label": "t:sections.main-collection-product-grid.settings.enable_sorting.label"
     },
     {
+      "type": "range",
+      "id": "limit",
+      "min": 2,
+      "max": 12,
+      "step": 1,
+      "default": 4,
+      "label": "t:sections.featured-collection.settings.limit.label"
+    },
+    {
+      "type": "range",
+      "id": "columns",
+      "min": 1,
+      "max": 6,
+      "step": 1,
+      "default": 4,
+      "label": "t:sections.common.settings.columns.label"
+    },
+    {
       "type": "checkbox",
-      "id": "collapse_on_larger_devices",
+      "id": "show_view_all",
+      "default": true,
+      "label": "t:sections.common.settings.show_view_all.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_vendor",
       "default": false,
-      "label": "t:sections.main-collection-product-grid.settings.collapse_on_larger_devices.label"
+      "label": "t:sections.featured-collection.settings.show_vendor.label"
     },
     {
       "type": "header",
-      "content": "t:sections.all.padding.section_padding_heading"
+      "content": "t:sections.common.headers.section_styles.content"
+    },
+    {
+      "type": "select",
+      "id": "heading_font_size",
+      "label": "t:sections.common.settings.heading_font_size.label",
+      "options": [
+        {
+          "value": "xs",
+          "label": "t:settings_schema.typography.settings.header__xs.label"
+        },
+        {
+          "value": "sm",
+          "label": "t:settings_schema.typography.settings.header__sm.label"
+        },
+        {
+          "value": "base",
+          "label": "t:settings_schema.typography.settings.header__base.label"
+        },
+        {
+          "value": "lg",
+          "label": "t:settings_schema.typography.settings.header__lg.label"
+        },
+        {
+          "value": "xl",
+          "label": "t:settings_schema.typography.settings.header__xl.label"
+        }
+      ],
+      "default": "base"
+    },
+    {
+      "type": "select",
+      "id": "heading_color",
+      "default": "primary",
+      "label": "t:sections.common.settings.heading_color.label",
+      "options": [
+        {
+          "value": "primary",
+          "label": "t:settings_schema.colors.settings.color_primary.label"
+        },
+        {
+          "value": "secondary",
+          "label": "t:settings_schema.colors.settings.color_secondary.label"
+        },
+        {
+          "value": "accent",
+          "label": "t:settings_schema.colors.settings.color_accent.label"
+        },
+        {
+          "value": "background-primary",
+          "label": "t:settings_schema.colors.settings.color_background_primary.label"
+        },
+        {
+          "value": "background-secondary",
+          "label": "t:settings_schema.colors.settings.color_background_secondary.label"
+        },
+        {
+          "value": "text-primary",
+          "label": "t:settings_schema.colors.settings.color_text_primary.label"
+        },
+        {
+          "value": "text-secondary",
+          "label": "t:settings_schema.colors.settings.color_text_secondary.label"
+        },
+        {
+          "value": "border",
+          "label": "t:settings_schema.colors.settings.color_border.label"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "subheading_font_size",
+      "label": "t:sections.common.settings.subheading_font_size.label",
+      "options": [
+        {
+          "value": "xs",
+          "label": "t:settings_schema.typography.settings.header__xs.label"
+        },
+        {
+          "value": "sm",
+          "label": "t:settings_schema.typography.settings.header__sm.label"
+        },
+        {
+          "value": "base",
+          "label": "t:settings_schema.typography.settings.header__base.label"
+        },
+        {
+          "value": "lg",
+          "label": "t:settings_schema.typography.settings.header__lg.label"
+        },
+        {
+          "value": "xl",
+          "label": "t:settings_schema.typography.settings.header__xl.label"
+        }
+      ],
+      "default": "sm"
+    },
+    {
+      "type": "select",
+      "id": "subheading_color",
+      "default": "secondary",
+      "label": "t:sections.common.settings.subheading_color.label",
+      "options": [
+        {
+          "value": "primary",
+          "label": "t:settings_schema.colors.settings.color_primary.label"
+        },
+        {
+          "value": "secondary",
+          "label": "t:settings_schema.colors.settings.color_secondary.label"
+        },
+        {
+          "value": "accent",
+          "label": "t:settings_schema.colors.settings.color_accent.label"
+        },
+        {
+          "value": "background-primary",
+          "label": "t:settings_schema.colors.settings.color_background_primary.label"
+        },
+        {
+          "value": "background-secondary",
+          "label": "t:settings_schema.colors.settings.color_background_secondary.label"
+        },
+        {
+          "value": "text-primary",
+          "label": "t:settings_schema.colors.settings.color_text_primary.label"
+        },
+        {
+          "value": "text-secondary",
+          "label": "t:settings_schema.colors.settings.color_text_secondary.label"
+        },
+        {
+          "value": "border",
+          "label": "t:settings_schema.colors.settings.color_border.label"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "section_background_color",
+      "default": "transparent",
+      "label": "t:sections.common.settings.background_color.label",
+      "options": [
+        {
+          "value": "transparent",
+          "label": "t:settings_schema.colors.settings.color_transparent.label"
+        },
+        {
+          "value": "primary",
+          "label": "t:settings_schema.colors.settings.color_primary.label"
+        },
+        {
+          "value": "secondary",
+          "label": "t:settings_schema.colors.settings.color_secondary.label"
+        },
+        {
+          "value": "accent",
+          "label": "t:settings_schema.colors.settings.color_accent.label"
+        },
+        {
+          "value": "background-primary",
+          "label": "t:settings_schema.colors.settings.color_background_primary.label"
+        },
+        {
+          "value": "background-secondary",
+          "label": "t:settings_schema.colors.settings.color_background_secondary.label"
+        },
+        {
+          "value": "text-primary",
+          "label": "t:settings_schema.colors.settings.color_text_primary.label"
+        },
+        {
+          "value": "text-secondary",
+          "label": "t:settings_schema.colors.settings.color_text_secondary.label"
+        },
+        {
+          "value": "border",
+          "label": "t:settings_schema.colors.settings.color_border.label"
+        }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "section_shadow",
+      "default": false,
+      "label": "t:sections.common.settings.shadow.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "section_rounded",
+      "default": false,
+      "label": "t:sections.common.settings.rounded.label"
     },
     {
       "type": "range",
-      "id": "padding_top",
+      "id": "grid_gap",
       "min": 0,
-      "max": 100,
-      "step": 4,
-      "unit": "px",
-      "label": "t:sections.all.padding.padding_top",
-      "default": 36
+      "max": 12,
+      "step": 1,
+      "default": 4,
+      "label": "t:sections.common.settings.grid_gap.label"
     },
     {
       "type": "range",
-      "id": "padding_bottom",
+      "id": "section_margin",
       "min": 0,
-      "max": 100,
-      "step": 4,
-      "unit": "px",
-      "label": "t:sections.all.padding.padding_bottom",
-      "default": 36
+      "max": 12,
+      "step": 1,
+      "default": 0,
+      "label": "t:sections.common.settings.margin.label"
+    },
+    {
+      "type": "range",
+      "id": "section_padding",
+      "min": 0,
+      "max": 12,
+      "step": 1,
+      "default": 4,
+      "label": "t:sections.common.settings.padding.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.common.headers.card_styles.content"
+    },
+    {
+      "type": "range",
+      "id": "card_heading_font_size",
+      "min": 1,
+      "max": 8,
+      "step": 1,
+      "default": 2,
+      "label": "t:sections.common.settings.heading_font_size.label"
+    },
+    {
+      "type": "select",
+      "id": "card_heading_color",
+      "default": "primary",
+      "label": "t:sections.common.settings.heading_color.label",
+      "options": [
+        {
+          "value": "primary",
+          "label": "t:settings_schema.colors.settings.color_primary.label"
+        },
+        {
+          "value": "secondary",
+          "label": "t:settings_schema.colors.settings.color_secondary.label"
+        },
+        {
+          "value": "accent",
+          "label": "t:settings_schema.colors.settings.color_accent.label"
+        },
+        {
+          "value": "background-primary",
+          "label": "t:settings_schema.colors.settings.color_background_primary.label"
+        },
+        {
+          "value": "background-secondary",
+          "label": "t:settings_schema.colors.settings.color_background_secondary.label"
+        },
+        {
+          "value": "text-primary",
+          "label": "t:settings_schema.colors.settings.color_text_primary.label"
+        },
+        {
+          "value": "text-secondary",
+          "label": "t:settings_schema.colors.settings.color_text_secondary.label"
+        },
+        {
+          "value": "border",
+          "label": "t:settings_schema.colors.settings.color_border.label"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "card_content_font_size",
+      "min": 1,
+      "max": 8,
+      "step": 1,
+      "default": 1,
+      "label": "t:sections.common.settings.card_content_font_size.label"
+    },
+    {
+      "type": "select",
+      "id": "card_content_color",
+      "default": "text-primary",
+      "label": "t:sections.common.settings.card_content_color.label",
+      "options": [
+        {
+          "value": "primary",
+          "label": "t:settings_schema.colors.settings.color_primary.label"
+        },
+        {
+          "value": "secondary",
+          "label": "t:settings_schema.colors.settings.color_secondary.label"
+        },
+        {
+          "value": "accent",
+          "label": "t:settings_schema.colors.settings.color_accent.label"
+        },
+        {
+          "value": "background-primary",
+          "label": "t:settings_schema.colors.settings.color_background_primary.label"
+        },
+        {
+          "value": "background-secondary",
+          "label": "t:settings_schema.colors.settings.color_background_secondary.label"
+        },
+        {
+          "value": "text-primary",
+          "label": "t:settings_schema.colors.settings.color_text_primary.label"
+        },
+        {
+          "value": "text-secondary",
+          "label": "t:settings_schema.colors.settings.color_text_secondary.label"
+        },
+        {
+          "value": "border",
+          "label": "t:settings_schema.colors.settings.color_border.label"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "card_background_color",
+      "default": "transparent",
+      "label": "t:sections.common.settings.background_color.label",
+      "options": [
+        {
+          "value": "transparent",
+          "label": "t:settings_schema.colors.settings.color_transparent.label"
+        },
+        {
+          "value": "primary",
+          "label": "t:settings_schema.colors.settings.color_primary.label"
+        },
+        {
+          "value": "secondary",
+          "label": "t:settings_schema.colors.settings.color_secondary.label"
+        },
+        {
+          "value": "accent",
+          "label": "t:settings_schema.colors.settings.color_accent.label"
+        },
+        {
+          "value": "background-primary",
+          "label": "t:settings_schema.colors.settings.color_background_primary.label"
+        },
+        {
+          "value": "background-secondary",
+          "label": "t:settings_schema.colors.settings.color_background_secondary.label"
+        },
+        {
+          "value": "text-primary",
+          "label": "t:settings_schema.colors.settings.color_text_primary.label"
+        },
+        {
+          "value": "text-secondary",
+          "label": "t:settings_schema.colors.settings.color_text_secondary.label"
+        },
+        {
+          "value": "border",
+          "label": "t:settings_schema.colors.settings.color_border.label"
+        }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "card_shadow",
+      "default": false,
+      "label": "t:sections.common.settings.shadow.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "card_rounded",
+      "default": false,
+      "label": "t:sections.common.settings.rounded.label"
+    },
+    {
+      "type": "range",
+      "id": "card_margin",
+      "min": 0,
+      "max": 12,
+      "step": 1,
+      "default": 0,
+      "label": "t:sections.common.settings.margin.label"
+    },
+    {
+      "type": "range",
+      "id": "card_padding",
+      "min": 0,
+      "max": 12,
+      "step": 1,
+      "default": 4,
+      "label": "t:sections.common.settings.padding.label"
     }
   ]
 }

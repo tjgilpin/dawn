@@ -1,0 +1,402 @@
+<link rel="stylesheet" href="{{ 'glide.core.min.css' | asset_url }}" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="{{ 'glide.theme.min.css' | asset_url }}" media="print" onload="this.media='all'">
+{%- if section.blocks.size > 1 -%}
+  <script src="{{ 'glide.min.js' | asset_url }}" defer="defer"></script>
+  <script src="{{ 'hero.js' | asset_url }}" defer="defer"></script>
+{%- endif -%}
+
+
+<div id="Hero-{{ section.id }}" class="flex w-full overflow-hidden bg-black hero-banners {% if section.blocks.size > 1 %}glide hero-slider{% endif %}">
+  <div class="w-full {% if section.blocks.size > 1 %}glide__track{% endif %}" {% if section.blocks.size > 1 %}data-glide-el="track"{% endif %}>
+    <ul class="{% if section.blocks.size > 1 %}glide__slides{% endif %}">
+      {%- for block in section.blocks -%}
+        <li key="{{ block.id }}" class="{% if section.blocks.size > 1 %}glide__slide{% endif %}">
+          <div key="{{ block.id }}" class="relative w-full banner-container">
+            <div class="absolute inset-0 banner-image">
+              <img srcset="{%- if block.settings.image.width >= 375 -%}{{ block.settings.image | image_url: '375x' }} 375w,{%- endif -%}
+                {%- if block.settings.image.width >= 750 -%}{{ block.settings.image | image_url: '750x' }} 750w,{%- endif -%}
+                {%- if block.settings.image.width >= 1100 -%}{{ block.settings.image | image_url: '1100x' }} 1100w,{%- endif -%}
+                {%- if block.settings.image.width >= 1500 -%}{{ block.settings.image | image_url: '1500x' }} 1500w,{%- endif -%}
+                {%- if block.settings.image.width >= 1780 -%}{{ block.settings.image | image_url: '1780x' }} 1780w,{%- endif -%}
+                {%- if block.settings.image.width >= 2000 -%}{{ block.settings.image | image_url: '2000x' }} 2000w,{%- endif -%}
+                {%- if block.settings.image.width >= 2800 -%}{{ block.settings.image | image_url: '2800x' }} 2800w{%- endif -%}"
+                class="object-cover w-full h-full"
+                src="{{ block.settings.image | image_url: '750x' }}"
+                width="{{ block.settings.image.width }}"
+                height="{{ block.settings.image.width | divided_by: block.settings.image.aspect_ratio }}"
+                alt="{{ block.settings.image.alt | escape }}"
+                loading="lazy"
+              >
+            </div>
+            <div class="absolute top-0 left-0 w-full h-full bg-black bg-opacity-50 banner__fg">
+              <div
+                class="flex h-full container justify-start items-end
+                  {% case block.settings.vertical_align %}
+                    {%- when 'top' -%}
+                      md:items-start
+                    {%- when 'center' -%}
+                      md:items-center
+                    {%- when 'bottom' -%}
+                      md:items-end
+                  {% endcase %}
+                  {% case block.settings.horizontal_align %}
+                    {%- when 'left' -%}
+                      md:text-left md:justify-start
+                    {%- when 'center' -%}
+                      md:text-center md:justify-center
+                    {%- when 'right' -%}
+                      md:text-right md:justify-end
+                  {% endcase %}
+                "
+              >
+                <div class="relative flex flex-col py-16 text-white banner-content sm:py-24 lg:py-32">
+                  <h1 class="text-{{ block.settings.heading_font_size }} text-{{ block.settings.heading_color }} ">
+                    {{ block.settings.heading }}
+                  </h1>
+                  <p class="my-6 font-normal text-{{ block.settings.subheading_font_size }} text-{{ block.settings.subheading_color }} ">
+                    {{ block.settings.subheading }}
+                  </p>
+                  {% if block.settings.primary_cta_text != blank %}
+                    <div
+                      class="flex flex-col items-start md:items-center mt-8 md:flex-row
+                        {% case block.settings.horizontal_align %}
+                          {%- when 'center' -%}
+                            md:justify-center
+                          {%- when 'right' -%}
+                            md:justify-end
+                        {% endcase %}
+                      "
+                    >
+                      {% if block.settings.primary_cta_text != blank %}
+                        {% if block.settings.primary_cta_link != blank %}
+                          <a href="{{ block.settings.primary_cta_link }}" class="button bg-primary">
+                        {% else %}
+                          <span class="button bg-primary">
+                        {% endif %}
+                          {{ block.settings.primary_cta_text | escape }}
+                        {% if block.settings.primary_cta_link != blank %}
+                          </a>
+                        {% else %}
+                          </span>
+                        {% endif %}
+                      {% endif %}
+                      {% if block.settings.secondary_cta_text != blank %}
+                        {% if block.settings.secondary_cta_link != blank %}
+                          <a href="{{ block.settings.secondary_cta_link }}" class="button bg-primary">
+                        {% else %}
+                          <span class="button bg-primary">
+                        {% endif %}
+                          {{ block.settings.secondary_cta_text | escape }}
+                        {% if block.settings.secondary_cta_link != blank %}
+                          </a>
+                        {% else %}
+                          </span>
+                        {% endif %}
+                        </a>
+                      {% endif %}
+                    </div>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+          </div>
+        </li>
+      {%- endfor -%}
+    </ul>
+  </div>
+
+  {% if section.settings.slider_arrows and section.blocks.size > 1 %}
+    <div class="glide__arrows" data-glide-el="controls">
+      <button aria-label="Swipe Slider Left" class="absolute glide__arrow glide__arrow--left " data-glide-dir="<">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
+        </button>
+        <button aria-label="Swipe Sliedr Right" class="absolute glide__arrow glide__arrow--right right-10 top-50" data-glide-dir=">">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
+        </button>
+    </div>
+  {% endif %}
+  {% if section.settings.slider_bullets and section.blocks.size > 2 %}
+    <div class="absolute bottom-0 justify-center w-full glide__bullets" data-glide-el="controls[nav]">
+      <button class="glide__bullet" data-glide-dir="=0"></button>
+      <button class="glide__bullet" data-glide-dir="=1"></button>
+      <button class="glide__bullet" data-glide-dir="=2"></button>
+    </div>
+  {% endif %}
+  {% if section.blocks.size > 1 %}
+    <div class="hidden">
+      <input value="{{ section.settings.autoplay }}" id="Hero-{{ section.id }}-autoplay" />
+    </div>
+  {% endif %}
+
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.hero-banners.name",
+  "tag": "section",
+  "class": "spaced-section spaced-section--full-width",
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:sections.hero-banners.settings.slider_settings.content"
+    },
+    {
+      "type": "text",
+      "id": "autoplay",
+      "default": "4000",
+      "label": "t:sections.hero-banners.settings.autoplay.label",
+      "info": "t:sections.hero-banners.settings.autoplay.info"
+    },
+    {
+      "type": "checkbox",
+      "id": "slider_arrows",
+      "default": true,
+      "label": "t:sections.hero-banners.settings.slider_arrows.label",
+      "info": "t:sections.hero-banners.settings.slider_arrows.info"
+    },
+    {
+      "type": "checkbox",
+      "id": "slider_bullets",
+      "default": false,
+      "label": "t:sections.hero-banners.settings.slider_bullets.label",
+      "info": "t:sections.hero-banners.settings.slider_bullets.info"
+    },
+    {
+      "type": "checkbox",
+      "id": "randomize",
+      "default": false,
+      "label": "t:sections.hero-banners.settings.randomize.label"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "hero-banner",
+      "name": "t:sections.hero-banners.blocks.hero-banner.name",
+      "limit": 10,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "t:sections.hero-banners.blocks.hero-banner.settings.image.label"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "t:sections.hero-banners.blocks.hero-banner.settings.heading.label"
+        },
+        {
+          "type": "text",
+          "id": "subheading",
+          "label": "t:sections.hero-banners.blocks.hero-banner.settings.subheading.label"
+        },
+        {
+          "type": "text",
+          "id": "primary_cta_text",
+          "label": "t:sections.hero-banners.blocks.hero-banner.settings.primary_cta_text.label"
+        },
+        {
+          "type": "url",
+          "id": "primary_cta_link",
+          "label": "t:sections.hero-banners.blocks.hero-banner.settings.primary_cta_link.label"
+        },
+        {
+          "type": "text",
+          "id": "secondary_cta_text",
+          "label": "t:sections.hero-banners.blocks.hero-banner.settings.secondary_cta_text.label"
+        },
+        {
+          "type": "url",
+          "id": "secondary_cta_link",
+          "label": "t:sections.hero-banners.blocks.hero-banner.settings.secondary_cta_link.label"
+        },
+        {
+          "type": "select",
+          "id": "heading_font_size",
+          "label": "t:sections.common.settings.heading_font_size.label",
+          "options": [
+            {
+              "value": "xs",
+              "label": "t:settings_schema.typography.settings.header__xs.label"
+            },
+            {
+              "value": "sm",
+              "label": "t:settings_schema.typography.settings.header__sm.label"
+            },
+            {
+              "value": "base",
+              "label": "t:settings_schema.typography.settings.header__base.label"
+            },
+            {
+              "value": "lg",
+              "label": "t:settings_schema.typography.settings.header__lg.label"
+            },
+            {
+              "value": "xl",
+              "label": "t:settings_schema.typography.settings.header__xl.label"
+            }
+          ],
+          "default": "xl"
+        },
+        {
+          "type": "select",
+          "id": "heading_color",
+          "default": "primary",
+          "label": "t:sections.common.settings.heading_color.label",
+          "options": [
+            {
+              "value": "primary",
+              "label": "t:settings_schema.colors.settings.color_primary.label"
+            },
+            {
+              "value": "secondary",
+              "label": "t:settings_schema.colors.settings.color_secondary.label"
+            },
+            {
+              "value": "accent",
+              "label": "t:settings_schema.colors.settings.color_accent.label"
+            },
+            {
+              "value": "background-primary",
+              "label": "t:settings_schema.colors.settings.color_background_primary.label"
+            },
+            {
+              "value": "background-secondary",
+              "label": "t:settings_schema.colors.settings.color_background_secondary.label"
+            },
+            {
+              "value": "text-primary",
+              "label": "t:settings_schema.colors.settings.color_text_primary.label"
+            },
+            {
+              "value": "text-secondary",
+              "label": "t:settings_schema.colors.settings.color_text_secondary.label"
+            },
+            {
+              "value": "border",
+              "label": "t:settings_schema.colors.settings.color_border.label"
+            }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "subheading_font_size",
+          "label": "t:sections.common.settings.subheading_font_size.label",
+          "options": [
+            {
+              "value": "xs",
+              "label": "t:settings_schema.typography.settings.header__xs.label"
+            },
+            {
+              "value": "sm",
+              "label": "t:settings_schema.typography.settings.header__sm.label"
+            },
+            {
+              "value": "base",
+              "label": "t:settings_schema.typography.settings.header__base.label"
+            },
+            {
+              "value": "lg",
+              "label": "t:settings_schema.typography.settings.header__lg.label"
+            },
+            {
+              "value": "xl",
+              "label": "t:settings_schema.typography.settings.header__xl.label"
+            }
+          ],
+          "default": "base"
+        },
+        {
+          "type": "select",
+          "id": "subheading_color",
+          "default": "border",
+          "label": "t:sections.common.settings.subheading_color.label",
+          "options": [
+            {
+              "value": "primary",
+              "label": "t:settings_schema.colors.settings.color_primary.label"
+            },
+            {
+              "value": "secondary",
+              "label": "t:settings_schema.colors.settings.color_secondary.label"
+            },
+            {
+              "value": "accent",
+              "label": "t:settings_schema.colors.settings.color_accent.label"
+            },
+            {
+              "value": "background-primary",
+              "label": "t:settings_schema.colors.settings.color_background_primary.label"
+            },
+            {
+              "value": "background-secondary",
+              "label": "t:settings_schema.colors.settings.color_background_secondary.label"
+            },
+            {
+              "value": "text-primary",
+              "label": "t:settings_schema.colors.settings.color_text_primary.label"
+            },
+            {
+              "value": "text-secondary",
+              "label": "t:settings_schema.colors.settings.color_text_secondary.label"
+            },
+            {
+              "value": "border",
+              "label": "t:settings_schema.colors.settings.color_border.label"
+            }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "vertical_align",
+          "options": [
+            {
+              "value": "top",
+              "label": "t:sections.hero-banners.blocks.hero-banner.settings.vertical_align.options__top.label"
+            },
+            {
+              "value": "center",
+              "label": "t:sections.hero-banners.blocks.hero-banner.settings.vertical_align.options__center.label"
+            },
+            {
+              "value": "bottom",
+              "label": "t:sections.hero-banners.blocks.hero-banner.settings.vertical_align.options__bottom.label"
+            }
+          ],
+          "default": "bottom",
+          "label": "t:sections.hero-banners.blocks.hero-banner.settings.vertical_align.label"
+        },
+        {
+          "type": "select",
+          "id": "horizontal_align",
+          "options": [
+            {
+              "value": "left",
+              "label": "t:sections.hero-banners.blocks.hero-banner.settings.horizontal_align.options__left.label"
+            },
+            {
+              "value": "center",
+              "label": "t:sections.hero-banners.blocks.hero-banner.settings.horizontal_align.options__center.label"
+            },
+            {
+              "value": "right",
+              "label": "t:sections.hero-banners.blocks.hero-banner.settings.horizontal_align.options__right.label"
+            }
+          ],
+          "default": "center",
+          "label": "t:sections.hero-banners.blocks.hero-banner.settings.horizontal_align.label"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.hero-banners.presets.name",
+      "blocks": [
+        {
+          "type": "hero-banner"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
