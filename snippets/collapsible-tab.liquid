@@ -1,0 +1,17 @@
+<div class="border-t product__accordion accordion py-{{ block.settings.vertical_padding }}" {{ block.shopify_attributes }}>
+  <details>
+    <summary>
+      <div class="relative flex items-center justify-between w-full py-4 text-left summary__title">
+        {% render 'icon-accordion', icon: block.settings.icon %}
+        <h2 class="w-full font-medium accordion__title 4 text-{{ block.settings.heading_font_size }} text-{{ block.settings.heading_color }}">
+          {{ block.settings.heading | default: block.settings.page.title }}
+        </h2>
+      </div>
+      {% render 'icon-caret' %}
+    </summary>
+    <div class="text-{{ block.settings.content_font_size }} text-{{ block.settings.content_color }} prose accordion__content">
+      {{ block.settings.content }}
+      {{ block.settings.page.content }}
+    </div>
+  </details>
+</div>

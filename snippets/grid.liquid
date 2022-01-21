@@ -1,0 +1,114 @@
+
+{% comment %}
+    Renders a grid
+
+    Accepts:
+    - section: {Object} Pass the entire section incase children need to check this
+    - items: {Array} of objects to render
+    - type: {String} Type of Item to render in grid
+    - count: {Integer} total count of items
+
+    Usage:
+    {% render 'grid', section: section, type: 'product', count: section.settings.collection.all_products_count %}
+{% endcomment %}
+
+<div class="container mx-auto">
+  <div class="bg-{{ section.settings.section_background_color }} m-{{ section.settings.section_margin }} p-{{ section.settings.section_padding }} {% if section.settings.section_rounded %}rounded-lg{% endif %} {% if section.settings.section_shadow %}shadow-lg{% endif %} ">
+    <div>
+      <h4 class="py-2 text-{{ section.settings.heading_font_size }} text-{{ section.settings.heading_color }}">{{ section.settings.heading | escape }}</h4>
+      {%- if section.settings.subheading -%}
+        <h5 class="py-1 text-{{ section.settings.subheading_font_size }} text-{{ section.settings.subheading_color }}">{{ section.settings.subheading | escape }}</h5>
+      {%- endif -%}
+    </div>
+    <div class="grid lg:grid-cols-{{ section.settings.columns }} gap-{{ section.settings.grid_gap }} ">
+      {%- case type -%}
+        {%- when 'product' -%}
+          {%- for product in items limit: section.settings.limit -%}
+            <div class="flex flex-col bg-{{ section.settings.card_background_color }} {% if section.settings.card_rounded %}rounded-lg{% endif %} {% if section.settings.card_shadow %}shadow-lg{% endif %}">
+              {% render 'product-card',
+                product_card_product: product,
+                media_size: section.settings.image_ratio,
+                show_secondary_image: section.settings.show_secondary_image,
+                add_image_padding: section.settings.add_image_padding,
+                show_vendor: section.settings.show_vendor,
+                heading_color: section.settings.card_heading_color,
+                heading_font_size: section.settings.card_heading_font_size,
+                content_color: section.settings.card_content_color,
+                content_font_size: section.settings.card_content_font_size,
+                margin: section.settings.card_margin,
+                padding: section.settings.card_padding
+              %}
+            </div>
+          {%- else -%}
+            {%- for i in (1..limit) -%}
+              <div class="flex">
+                {% render 'product-card-placeholder' %}
+              </div>
+            {%- endfor -%}
+          {%- endfor -%}
+        {%- when 'collection' -%}
+          {%- for block in section.blocks -%}
+            <div class="flex flex-col bg-{{ section.settings.card_background_color }} {% if section.settings.card_rounded %}rounded-lg{% endif %} {% if section.settings.card_shadow %}shadow-lg{% endif %}">
+              {% render 'collection-card',
+                collection: block.settings.collection,
+                media_size: section.settings.image_ratio,
+                add_image_padding: section.settings.add_image_padding,
+                heading_color: section.settings.card_heading_color,
+                heading_font_size: section.settings.card_heading_font_size,
+                content_color: section.settings.card_content_color,
+                content_font_size: section.settings.card_content_font_size,
+                margin: section.settings.card_margin,
+                padding: section.settings.card_padding
+              %}
+            </div>
+          {%- endfor -%}
+        {%- when 'article' -%}
+          {%- for article in section.settings.blog.articles limit: section.settings.limit -%}
+            <div class="flex flex-col bg-{{ section.settings.card_background_color }} {% if section.settings.card_rounded %}rounded-lg{% endif %} {% if section.settings.card_shadow %}shadow-lg{% endif %}">
+              {% render 'article-card',
+                blog: section.settings.blog,
+                article: article,
+                show_image: section.settings.show_image,
+                show_date: section.settings.show_date,
+                show_author: section.settings.show_author
+                heading_color: section.settings.card_heading_color,
+                heading_font_size: section.settings.card_heading_font_size,
+                content_color: section.settings.card_content_color,
+                content_font_size: section.settings.card_content_font_size,
+                margin: section.settings.card_margin,
+                padding: section.settings.card_padding
+              %}
+            </div>
+          {%- endfor -%}
+          {% render 'article-card' %}
+      {%- endcase -%}
+    </div>
+
+    {%- if section.settings.show_view_all -%}
+      <div class="center">
+        {%- case type -%}
+          {%- when 'product' -%}
+            <a href="{{ section.settings.collection.url }}"
+              class="bg-primary text-text-primary button"
+              aria-label="{{ 'sections.featured_collection.view_all_label' | t: collection_name: section.settings.collection.heading }}"
+            >
+              {{ 'sections.featured_collection.view_all' | t }}
+            </a>
+          {%- when 'collection' %}
+            {%- if section.settings.show_view_all and section.blocks.size < collections.size -%}
+              <div class="center mt-8">
+                <a href="{{ routes.collections_url }}" class="bg-primary text-text-primary button">{{ 'sections.collection_list.view_all' | t }}</a>
+              </div>
+            {%- endif -%}
+          {%- when 'article' %}
+            {%- if section.settings.show_view_all and section.blocks.size < collections.size -%}
+              <div class="center mt-8">
+                <a href="{{ section.settings.blog.url }}" class="bg-primary text-text-primary button">{{ 'sections.featured_blog.view_all' | t }}</a>
+              </div>
+            {%- endif -%}
+        {%- endcase -%}
+
+      </div>
+    {%- endif -%}
+  </div>
+</div>

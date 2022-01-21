@@ -1,12 +1,10 @@
 {% comment %}
     Renders facets (filtering and sorting)
-
     Accepts:
     - results: {Object} Collection or Search object
     - enable_filtering: {Boolean} Show filtering when true
     - enable_sorting: {Boolean} Show sorting when true
     - collapse_on_larger_devices: {Boolean} Collapse filtering/sorting into menu on larger devices when true
-
     Usage:
     {% render 'facets', results: collection, enable_filtering: true, enable_sorting: true, collapse_on_larger_devices: false %}
 {% endcomment %}
@@ -43,7 +41,7 @@
               {% case filter.type %}
               {% when 'list' %}
                 <details id="Details-{{ forloop.index }}-{{ section.id }}" class="disclosure-has-popup facets__disclosure js-filter" data-index="{{ forloop.index }}">
-                  <summary class="facets__summary caption-large focus-offset">
+                  <summary class="facets__summary text-text-secondary text-2 focus-offset">
                     <div>
                       <span>{{ filter.label | escape }}</span>
                       {% render 'icon-caret' %}
@@ -206,14 +204,14 @@
         {% endif %}
 
         {%- if enable_sorting -%}
-          <div class="facet-filters sorting caption">
+          <div class="facet-filters sorting text-text-secondary text-2">
             <div class="facet-filters__field">
-              <h2 class="facet-filters__label caption-large text-body">
+              <h2 class="facet-filters__label">
                 <label for="SortBy">{{ 'products.facets.sort_by_label' | t }}</label>
               </h2>
               <div class="select">
                 {%- assign sort_by = results.sort_by | default: results.default_sort_by -%}
-                <select name="sort_by" class="facet-filters__sort select__select caption-large" id="SortBy" aria-describedby="a11y-refresh-page-message">
+                <select name="sort_by" class="facet-filters__sort select__select" id="SortBy" aria-describedby="a11y-refresh-page-message">
                   {%- for option in results.sort_options -%}
                     <option value="{{ option.value | escape }}"{% if option.value == sort_by %} selected="selected"{% endif %}>{{ option.name | escape }}</option>
                   {%- endfor -%}
@@ -228,8 +226,8 @@
           </div>
         {%- endif -%}
 
-        <div class="product-count light" role="status">
-          <h2 class="product-count__text text-body">
+        <div class="product-count text-text-secondary text-sm" role="status">
+          <h2 class="text-2 text-text-secondary">
             <span id="ProductCountDesktop">
               {%- if results.results_count -%}
                 {{ 'templates.search.results_with_count' | t: terms: results.terms, count: results.results_count }}

@@ -1,0 +1,42 @@
+{%- case block.settings.display -%}
+  {%- when 'default' -%}
+    <div class"tracklist w-full border-t py-{{ block.settings.vertical_padding }}">
+      <div class="relative flex items-center justify-between w-full py-4 text-left summary__title">
+        <h2 class="w-full font-medium 4 text-{{ block.settings.heading_font_size }} text-{{ block.settings.heading_color }} ">
+          {{ block.settings.heading }}
+        </h2>
+      </div>
+  {%- when 'collapsible_tab' -%}
+    <div class"tracklist w-full product__accordion accordion py-{{ block.settings.vertical_padding }}">
+      <details>
+        <summary>
+          <div class="relative flex items-center justify-between w-full py-4 text-left summary__title">
+            {%- if block.settings.icon -%}
+              {% render 'icon-accordion', icon: block.settings.icon %}
+            {%- endif -%}
+            <h2 class="w-full font-medium 4 text-{{ block.settings.heading_font_size }} text-{{ block.settings.heading_color }} accordion__title">
+              {{ block.settings.heading }}
+            </h2>
+          </div>
+          {% render 'icon-caret' %}
+        </summary>
+  {%- when 'popup' -%}
+    <div>
+{%- endcase -%}
+        <div class="pb-2 text-{{ block.settings.content_font_size }} text-{{ block.settings.content_color }} {%- if block.settings.display == 'collapsible_tab' -%} accordion__content {%- endif -%}">
+          {%- for album in tracklist -%}
+            <ul class="list-none py-2 border-t">
+              <span>{{ album.label }}</span>
+              {%- for track in album.tracks -%}
+                <li class="py-2 text-{{ block.settings.content_font_size }} text-{{ block.settings.content_color }}">
+                  <span>{{ track.number }}{{ block.settings.track_number_suffix }} </span>
+                  <span>{{ track.title }}</span>
+                </li>
+              {%- endfor -%}
+            </ul>
+          {%- endfor -%}
+        </div>
+    {%- if block.settings.display == 'collapsible_tab' -%}
+      </details>
+    {%- endif -%}
+    </div>
