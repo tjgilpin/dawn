@@ -1,11 +1,133 @@
 [
   {
     "name": "theme_info",
-    "theme_name": "Dawn",
-    "theme_version": "2.5.0",
+    "theme_name": "Dusk",
+    "theme_version": "1.1.0",
     "theme_author": "Shopify",
-    "theme_documentation_url": "https://help.shopify.com/manual/online-store/themes/os20/themes-by-shopify/dawn",
-    "theme_support_url": "https://support.shopify.com/"
+    "theme_documentation_url": "https:\/\/shopify.dev\/themes\/tools\/dawn",
+    "theme_support_url": "https:\/\/support.shopify.com\/"
+  },
+  {
+    "name": "t:settings_schema.site.name",
+    "settings": [
+      {
+        "type": "header",
+        "content": "t:settings_schema.site.settings.header__1.content"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "t:settings_schema.site.settings.title.label",
+        "default": "Joe Artist"
+      },
+      {
+        "type": "text",
+        "id": "slogan",
+        "label": "t:settings_schema.site.settings.slogan.label"
+      }
+    ]
+  },
+  {
+    "name": "t:settings_schema.layout.name",
+    "settings": [
+      {
+        "type": "header",
+        "content": "t:settings_schema.layout.settings.header__1.content"
+      },
+      {
+        "type": "select",
+        "id": "container_style",
+        "label": "t:settings_schema.layout.settings.container_style.label",
+        "default": "fixed",
+        "info": "setting not used yet",
+        "options": [
+          {
+            "value": "fixed",
+            "label": "t:settings_schema.layout.settings.container_style.options__fixed.label"
+          },
+          {
+            "value": "fluid",
+            "label": "t:settings_schema.layout.settings.container_style.options__fluid.label"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "container_width",
+        "label": "t:settings_schema.layout.settings.container_width.label",
+        "default": "1200px",
+        "options": [
+          {
+            "value": "960px",
+            "label": "960px"
+          },
+          {
+            "value": "1024px",
+            "label": "1024px"
+          },
+          {
+            "value": "1100px",
+            "label": "1100px"
+          },
+          {
+            "value": "1200px",
+            "label": "1200px"
+          },
+          {
+            "value": "1280px",
+            "label": "1280px"
+          },
+          {
+            "value": "1440px",
+            "label": "1440px"
+          },
+          {
+            "value": "1600px",
+            "label": "1600px"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "container_width_md",
+        "label": "t:settings_schema.layout.settings.container_width_md.label",
+        "default": "768px",
+        "options": [
+          {
+            "value": "640px",
+            "label": "640px"
+          },
+          {
+            "value": "768px",
+            "label": "768px"
+          },
+          {
+            "value": "900px",
+            "label": "900px"
+          },
+          {
+            "value": "960px",
+            "label": "960px"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "container_width_sm",
+        "label": "t:settings_schema.layout.settings.container_width_sm.label",
+        "default": "640px",
+        "options": [
+          {
+            "value": "640px",
+            "label": "640px"
+          },
+          {
+            "value": "768px",
+            "label": "768px"
+          }
+        ]
+      }
+    ]
   },
   {
     "name": "t:settings_schema.colors.name",
@@ -16,73 +138,66 @@
       },
       {
         "type": "color",
-        "id": "colors_solid_button_labels",
+        "id": "color_primary",
+        "default": "#2AB3E2",
+        "label": "t:settings_schema.colors.settings.color_primary.label",
+        "info": "t:settings_schema.colors.settings.color_primary.info"
+      },
+      {
+        "type": "color",
+        "id": "color_secondary",
+        "default": "#9D572C",
+        "label": "t:settings_schema.colors.settings.color_secondary.label",
+        "info": "t:settings_schema.colors.settings.color_secondary.info"
+      },
+      {
+        "type": "color",
+        "id": "color_accent",
+        "default": "#b2ab2a",
+        "label": "t:settings_schema.colors.settings.color_accent.label",
+        "info": "t:settings_schema.colors.settings.color_accent.info"
+      },
+      {
+        "type": "color",
+        "id": "color_text_primary",
+        "default": "#000000",
+        "label": "t:settings_schema.colors.settings.color_text_primary.label",
+        "info": "t:settings_schema.colors.settings.color_text_primary.info"
+      },
+      {
+        "type": "color",
+        "id": "color_text_secondary",
+        "default": "#000000",
+        "label": "t:settings_schema.colors.settings.color_text_secondary.label",
+        "info": "t:settings_schema.colors.settings.color_text_secondary.info"
+      },
+      {
+        "type": "color",
+        "id": "color_background_primary",
         "default": "#FFFFFF",
-        "label": "t:settings_schema.colors.settings.colors_solid_button_labels.label",
-        "info": "t:settings_schema.colors.settings.colors_solid_button_labels.info"
+        "label": "t:settings_schema.colors.settings.color_background_primary.label",
+        "info": "t:settings_schema.colors.settings.color_background_primary.info"
       },
       {
         "type": "color",
-        "id": "colors_accent_1",
-        "default": "#121212",
-        "label": "t:settings_schema.colors.settings.colors_accent_1.label",
-        "info": "t:settings_schema.colors.settings.colors_accent_1.info"
-      },
-      {
-        "id": "gradient_accent_1",
-        "type": "color_background",
-        "label": "t:settings_schema.colors.settings.gradient_accent_1.label"
+        "id": "color_background_secondary",
+        "default": "#EEEEEE",
+        "label": "t:settings_schema.colors.settings.color_background_secondary.label",
+        "info": "t:settings_schema.colors.settings.color_background_secondary.info"
       },
       {
         "type": "color",
-        "id": "colors_accent_2",
-        "default": "#334FB4",
-        "label": "t:settings_schema.colors.settings.colors_accent_2.label"
+        "id": "color_border",
+        "default": "#efefef",
+        "label": "t:settings_schema.colors.settings.color_border.label",
+        "info": "t:settings_schema.colors.settings.color_border.info"
       },
       {
-        "id": "gradient_accent_2",
-        "type": "color_background",
-        "label": "t:settings_schema.colors.settings.gradient_accent_2.label"
-      },
-      {
-        "type": "header",
-        "content": "t:settings_schema.colors.settings.header__2.content"
-      },
-      {
-        "type": "color",
-        "id": "colors_text",
-        "default": "#121212",
-        "label": "t:settings_schema.colors.settings.colors_text.label",
-        "info": "t:settings_schema.colors.settings.colors_text.info"
-      },
-      {
-        "type": "color",
-        "id": "colors_outline_button_labels",
-        "default": "#121212",
-        "label": "t:settings_schema.colors.settings.colors_outline_button_labels.label",
-        "info": "t:settings_schema.colors.settings.colors_outline_button_labels.info"
-      },
-      {
-        "type": "color",
-        "id": "colors_background_1",
-        "default": "#FFFFFF",
-        "label": "t:settings_schema.colors.settings.colors_background_1.label"
-      },
-      {
-        "id": "gradient_background_1",
-        "type": "color_background",
-        "label": "t:settings_schema.colors.settings.gradient_background_1.label"
-      },
-      {
-        "type": "color",
-        "id": "colors_background_2",
-        "default": "#F3F3F3",
-        "label": "t:settings_schema.colors.settings.colors_background_2.label"
-      },
-      {
-        "id": "gradient_background_2",
-        "type": "color_background",
-        "label": "t:settings_schema.colors.settings.gradient_background_2.label"
+        "type": "checkbox",
+        "id": "show_grid_border",
+        "default": false,
+        "label": "t:settings_schema.colors.settings.show_grid_border.label",
+        "info": "t:settings_schema.colors.settings.show_grid_border.info"
       }
     ]
   },
@@ -96,19 +211,9 @@
       {
         "type": "font_picker",
         "id": "type_header_font",
-        "default": "assistant_n4",
+        "default": "sans-serif",
         "label": "t:settings_schema.typography.settings.type_header_font.label",
         "info": "t:settings_schema.typography.settings.type_header_font.info"
-      },
-      {
-        "type": "range",
-        "id": "heading_scale",
-        "min": 100,
-        "max": 150,
-        "step": 5,
-        "unit": "%",
-        "label": "t:settings_schema.typography.settings.heading_scale.label",
-        "default": 100
       },
       {
         "type": "header",
@@ -117,891 +222,569 @@
       {
         "type": "font_picker",
         "id": "type_body_font",
-        "default": "assistant_n4",
+        "default": "sans-serif",
         "label": "t:settings_schema.typography.settings.type_body_font.label",
         "info": "t:settings_schema.typography.settings.type_body_font.info"
       },
       {
-        "type": "range",
-        "id": "body_scale",
-        "min": 100,
-        "max": 130,
-        "step": 5,
-        "unit": "%",
-        "label": "t:settings_schema.typography.settings.body_scale.label",
-        "default": 100
+        "type": "header",
+        "content": "t:settings_schema.typography.settings.header__xs.content"
+      },
+      {
+        "type": "text",
+        "id": "type_font_size_xs",
+        "default": "0.625rem",
+        "label": "t:settings_schema.typography.settings.font_size.label",
+        "info": "t:settings_schema.typography.settings.font_size.info"
+      },
+      {
+        "type": "text",
+        "id": "type_line_height_xs",
+        "default": "0.625rem",
+        "label": "t:settings_schema.typography.settings.line_height.label",
+        "info": "t:settings_schema.typography.settings.line_height.info"
+      },
+      {
+        "type": "header",
+        "content": "t:settings_schema.typography.settings.header__sm.content"
+      },
+      {
+        "type": "text",
+        "id": "type_font_size_sm",
+        "default": "0.75rem",
+        "label": "t:settings_schema.typography.settings.font_size.label",
+        "info": "t:settings_schema.typography.settings.font_size.info"
+      },
+      {
+        "type": "text",
+        "id": "type_line_height_sm",
+        "default": "0.875rem",
+        "label": "t:settings_schema.typography.settings.line_height.label",
+        "info": "t:settings_schema.typography.settings.line_height.info"
+      },
+      {
+        "type": "header",
+        "content": "t:settings_schema.typography.settings.header__base.content"
+      },
+      {
+        "type": "text",
+        "id": "type_font_size_base",
+        "default": "1rem",
+        "label": "t:settings_schema.typography.settings.font_size.label",
+        "info": "t:settings_schema.typography.settings.font_size.info"
+      },
+      {
+        "type": "text",
+        "id": "type_line_height_base",
+        "default": "1.125rem",
+        "label": "t:settings_schema.typography.settings.line_height.label",
+        "info": "t:settings_schema.typography.settings.line_height.info"
+      },
+      {
+        "type": "header",
+        "content": "t:settings_schema.typography.settings.header__lg.content"
+      },
+      {
+        "type": "text",
+        "id": "type_font_size_lg",
+        "default": "1.25rem",
+        "label": "t:settings_schema.typography.settings.font_size.label",
+        "info": "t:settings_schema.typography.settings.font_size.info"
+      },
+      {
+        "type": "text",
+        "id": "type_line_height_lg",
+        "default": "1.375rem",
+        "label": "t:settings_schema.typography.settings.line_height.label",
+        "info": "t:settings_schema.typography.settings.line_height.info"
+      },
+      {
+        "type": "header",
+        "content": "t:settings_schema.typography.settings.header__xl.content"
+      },
+      {
+        "type": "text",
+        "id": "type_font_size_xl",
+        "default": "1.5rem",
+        "label": "t:settings_schema.typography.settings.font_size.label",
+        "info": "t:settings_schema.typography.settings.font_size.info"
+      },
+      {
+        "type": "text",
+        "id": "type_line_height_xl",
+        "default": "1.75rem",
+        "label": "t:settings_schema.typography.settings.line_height.label",
+        "info": "t:settings_schema.typography.settings.line_height.info"
+      },
+      {
+        "type": "header",
+        "content": "t:settings_schema.typography.settings.header__2xl.content"
+      },
+      {
+        "type": "text",
+        "id": "type_font_size_2xl",
+        "default": "2rem",
+        "label": "t:settings_schema.typography.settings.font_size.label",
+        "info": "t:settings_schema.typography.settings.font_size.info"
+      },
+      {
+        "type": "text",
+        "id": "type_line_height_2xl",
+        "default": "2.25rem",
+        "label": "t:settings_schema.typography.settings.line_height.label",
+        "info": "t:settings_schema.typography.settings.line_height.info"
+      },
+      {
+        "type": "header",
+        "content": "t:settings_schema.typography.settings.header__3xl.content"
+      },
+      {
+        "type": "text",
+        "id": "type_font_size_3xl",
+        "default": "3rem",
+        "label": "t:settings_schema.typography.settings.font_size.label",
+        "info": "t:settings_schema.typography.settings.font_size.info"
+      },
+      {
+        "type": "text",
+        "id": "type_line_height_3xl",
+        "default": "3.5rem",
+        "label": "t:settings_schema.typography.settings.line_height.label",
+        "info": "t:settings_schema.typography.settings.line_height.info"
+      },
+      {
+        "type": "header",
+        "content": "t:settings_schema.typography.settings.header__4xl.content"
+      },
+      {
+        "type": "text",
+        "id": "type_font_size_4xl",
+        "default": "4.5rem",
+        "label": "t:settings_schema.typography.settings.font_size.label",
+        "info": "t:settings_schema.typography.settings.font_size.info"
+      },
+      {
+        "type": "text",
+        "id": "type_line_height_4xl",
+        "default": "5rem",
+        "label": "t:settings_schema.typography.settings.line_height.label",
+        "info": "t:settings_schema.typography.settings.line_height.info"
       }
     ]
   },
   {
-    "name": "t:settings_schema.layout.name",
-    "settings": [
-      {
-        "type": "select",
-        "id": "page_width",
-        "options": [
-          {
-            "value": "1200",
-            "label": "t:settings_schema.layout.settings.page_width.options__1.label"
-          },
-          {
-            "value": "1600",
-            "label": "t:settings_schema.layout.settings.page_width.options__2.label"
-          }
-        ],
-        "default": "1600",
-        "label": "t:settings_schema.layout.settings.page_width.label"
-        },
-      {
-        "type": "range",
-        "id": "spacing_sections",
-        "min": 0,
-        "max": 100,
-        "step": 4,
-        "unit": "px",
-        "label": "t:settings_schema.layout.settings.spacing_sections.label",
-        "default": 0
-      },
-      {
-        "type": "header",
-        "content": "t:settings_schema.layout.settings.header__grid.content"
-      },
-      {
-        "type": "paragraph",
-        "content": "t:settings_schema.layout.settings.paragraph__grid.content"
-      },
-      {
-        "type": "range",
-        "id": "spacing_grid_horizontal",
-        "min": 4,
-        "max": 40,
-        "step": 4,
-        "default": 8,
-        "unit": "px",
-        "label": "t:settings_schema.layout.settings.spacing_grid_horizontal.label"
-      },
-      {
-        "type": "range",
-        "id": "spacing_grid_vertical",
-        "min": 4,
-        "max": 40,
-        "step": 4,
-        "default": 8,
-        "unit": "px",
-        "label": "t:settings_schema.layout.settings.spacing_grid_vertical.label"
-      }     
-    ]
-  },
-  {
-    "name": "t:settings_schema.buttons.name",
-    "settings": [     
-      {
-        "type": "header",
-        "content": "t:settings_schema.global.settings.header__border.content"
-      },
-      {
-        "type": "range",
-        "id": "buttons_border_thickness",
-        "min": 0,
-        "max": 12,
-        "step": 1,
-        "unit": "px",
-        "label": "t:settings_schema.global.settings.thickness.label",
-        "default": 1
-      },
-      {
-        "type": "range",
-        "id": "buttons_border_opacity",
-        "min": 0,
-        "max": 100,
-        "step": 5,
-        "unit": "%",
-        "label": "t:settings_schema.global.settings.opacity.label",
-        "default": 100
-      },      
-      {
-        "type": "range",
-        "id": "buttons_radius",
-        "min": 0,
-        "max": 40,
-        "step": 2,
-        "unit": "px",
-        "label": "t:settings_schema.global.settings.corner_radius.label",
-        "default": 0
-      },
-      {
-        "type": "header",
-        "content": "t:settings_schema.global.settings.header__shadow.content"
-      },
-      {
-        "type": "range",
-        "id": "buttons_shadow_opacity",
-        "min": 0,
-        "max": 100,
-        "step": 5,
-        "unit": "%",
-        "label": "t:settings_schema.global.settings.opacity.label",
-        "default": 0
-      },
-      {
-        "type": "range",
-        "id": "buttons_shadow_horizontal_offset",
-        "min": -12,
-        "max": 12,
-        "step": 2,
-        "unit": "px",
-        "label": "t:settings_schema.global.settings.horizontal_offset.label",
-        "default": 0
-      },
-      {
-        "type": "range",
-        "id": "buttons_shadow_vertical_offset",
-        "min": -12,
-        "max": 12,
-        "step": 2,
-        "unit": "px",
-        "label": "t:settings_schema.global.settings.vertical_offset.label",
-        "default": 0
-      },
-      {
-        "type": "range",
-        "id": "buttons_shadow_blur",
-        "min": 0,
-        "max": 20,
-        "step": 5,
-        "unit": "px",
-        "label": "t:settings_schema.global.settings.blur.label",
-        "default": 0
-      }
-    ]
-  },
-  {
-    "name": "t:settings_schema.variant_pills.name",
-    "settings": [     
-      {
-        "type": "header",
-        "content": "t:settings_schema.global.settings.header__border.content"
-      },
-      {
-        "type": "range",
-        "id": "variant_pills_border_thickness",
-        "min": 0,
-        "max": 12,
-        "step": 1,
-        "unit": "px",
-        "label": "t:settings_schema.global.settings.thickness.label",
-        "default": 1
-      },
-      {
-        "type": "range",
-        "id": "variant_pills_border_opacity",
-        "min": 0,
-        "max": 100,
-        "step": 5,
-        "unit": "%",
-        "label": "t:settings_schema.global.settings.opacity.label",
-        "default": 55
-      },      
-      {
-        "type": "range",
-        "id": "variant_pills_radius",
-        "min": 0,
-        "max": 40,
-        "step": 2,
-        "unit": "px",
-        "label": "t:settings_schema.global.settings.corner_radius.label",
-        "default": 40
-      },
-      {
-        "type": "header",
-        "content": "t:settings_schema.global.settings.header__shadow.content"
-      },
-      {
-        "type": "range",
-        "id": "variant_pills_shadow_opacity",
-        "min": 0,
-        "max": 100,
-        "step": 5,
-        "unit": "%",
-        "label": "t:settings_schema.global.settings.opacity.label",
-        "default": 0
-      },
-      {
-        "type": "range",
-        "id": "variant_pills_shadow_horizontal_offset",
-        "min": -12,
-        "max": 12,
-        "step": 2,
-        "unit": "px",
-        "label": "t:settings_schema.global.settings.horizontal_offset.label",
-        "default": 0
-      },
-      {
-        "type": "range",
-        "id": "variant_pills_shadow_vertical_offset",
-        "min": -12,
-        "max": 12,
-        "step": 2,
-        "unit": "px",
-        "label": "t:settings_schema.global.settings.vertical_offset.label",
-        "default": 0
-      },
-      {
-        "type": "range",
-        "id": "variant_pills_shadow_blur",
-        "min": 0,
-        "max": 20,
-        "step": 5,
-        "unit": "px",
-        "label": "t:settings_schema.global.settings.blur.label",
-        "default": 0
-      }
-    ]
-  },
-  {
-    "name": "t:settings_schema.inputs.name",
-    "settings": [     
-      {
-        "type": "header",
-        "content": "t:settings_schema.global.settings.header__border.content"
-      },
-      {
-        "type": "range",
-        "id": "inputs_border_thickness",
-        "min": 0,
-        "max": 12,
-        "step": 1,
-        "unit": "px",
-        "label": "t:settings_schema.global.settings.thickness.label",
-        "default": 1
-      },
-      {
-        "type": "range",
-        "id": "inputs_border_opacity",
-        "min": 0,
-        "max": 100,
-        "step": 5,
-        "unit": "%",
-        "label": "t:settings_schema.global.settings.opacity.label",
-        "default": 55
-      },     
-      {
-        "type": "range",
-        "id": "inputs_radius",
-        "min": 0,
-        "max": 40,
-        "step": 2,
-        "unit": "px",
-        "label": "t:settings_schema.global.settings.corner_radius.label",
-        "default": 0
-      },
-      {
-        "type": "header",
-        "content": "t:settings_schema.global.settings.header__shadow.content"
-      },
-      {
-        "type": "range",
-        "id": "inputs_shadow_opacity",
-        "min": 0,
-        "max": 100,
-        "step": 5,
-        "unit": "%",
-        "label": "t:settings_schema.global.settings.opacity.label",
-        "default": 0
-      },
-      {
-        "type": "range",
-        "id": "inputs_shadow_horizontal_offset",
-        "min": -12,
-        "max": 12,
-        "step": 2,
-        "unit": "px",
-        "label": "t:settings_schema.global.settings.horizontal_offset.label",
-        "default": 0
-      },
-      {
-        "type": "range",
-        "id": "inputs_shadow_vertical_offset",
-        "min": -12,
-        "max": 12,
-        "step": 2,
-        "unit": "px",
-        "label": "t:settings_schema.global.settings.vertical_offset.label",
-        "default": 0
-      },
-      {
-        "type": "range",
-        "id": "inputs_shadow_blur",
-        "min": 0,
-        "max": 20,
-        "step": 5,
-        "unit": "px",
-        "label": "t:settings_schema.global.settings.blur.label",
-        "default": 0
-      }
-    ]
-  },
-  {
-    "name": "t:settings_schema.cards.name",
-    "settings": [
-      {
-        "type": "select",
-        "id": "card_style",
-        "options": [
-          {
-            "value": "standard",
-            "label": "t:settings_schema.cards.settings.style.options__1.label"
-          },
-          {
-            "value": "card",
-            "label": "t:settings_schema.cards.settings.style.options__2.label"
-          }
-        ],
-        "default": "standard",
-        "label": "t:settings_schema.cards.settings.style.label"
-      },
-      {
-        "type": "range",
-        "id": "card_image_padding",
-        "min": 0,
-        "max": 20,
-        "step": 2,
-        "unit": "px",
-        "label": "t:settings_schema.global.settings.image_padding.label",
-        "default": 0
-      },
-      {
-        "type": "select",
-        "id": "card_text_alignment",
-        "options": [
-          {
-            "value": "left",
-            "label": "t:settings_schema.global.settings.text_alignment.options__1.label"
-          },
-          {
-            "value": "center",
-            "label": "t:settings_schema.global.settings.text_alignment.options__2.label"
-          },
-          {
-            "value": "right",
-            "label": "t:settings_schema.global.settings.text_alignment.options__3.label"
-          }
-        ],
-        "default": "left",
-        "label": "t:settings_schema.global.settings.text_alignment.label"
-      },
-      {
-        "type": "select",
-        "id": "card_color_scheme",
-        "options": [
-          {
-            "value": "accent-1",
-            "label": "t:settings_schema.global.settings.color_scheme.options__1.label"
-          },
-          {
-            "value": "accent-2",
-            "label": "t:settings_schema.global.settings.color_scheme.options__2.label"
-          },
-          {
-            "value": "background-1",
-            "label": "t:settings_schema.global.settings.color_scheme.options__3.label"
-          },
-          {
-            "value": "background-2",
-            "label": "t:settings_schema.global.settings.color_scheme.options__4.label"
-          },
-          {
-            "value": "inverse",
-            "label": "t:settings_schema.global.settings.color_scheme.options__5.label"
-          }
-        ],
-        "default": "background-1",
-        "label": "t:settings_schema.global.settings.color_scheme.label"
-      },
-      {
-        "type": "header",
-        "content": "t:settings_schema.global.settings.header__border.content"
-      },
-      {
-        "type": "range",
-        "id": "card_border_thickness",
-        "min": 0,
-        "max": 24,
-        "step": 1,
-        "unit": "px",
-        "label": "t:settings_schema.global.settings.thickness.label",
-        "default": 1
-      },
-      {
-        "type": "range",
-        "id": "card_border_opacity",
-        "min": 0,
-        "max": 100,
-        "step": 5,
-        "unit": "%",
-        "label": "t:settings_schema.global.settings.opacity.label",
-        "default": 10
-      },
-      {
-        "type": "range",
-        "id": "card_corner_radius",
-        "min": 0,
-        "max": 40,
-        "step": 2,
-        "unit": "px",
-        "label": "t:settings_schema.global.settings.corner_radius.label",
-        "default": 0
-      },
-      {
-        "type": "header",
-        "content": "t:settings_schema.global.settings.header__shadow.content"
-      },
-      {
-        "type": "range",
-        "id": "card_shadow_opacity",
-        "min": 0,
-        "max": 100,
-        "step": 5,
-        "unit": "%",
-        "label": "t:settings_schema.global.settings.opacity.label",
-        "default": 10
-      },
-      {
-        "type": "range",
-        "id": "card_shadow_horizontal_offset",
-        "min": -40,
-        "max": 40,
-        "step": 2,
-        "unit": "px",
-        "label": "t:settings_schema.global.settings.horizontal_offset.label",
-        "default": 0
-      },
-      {
-        "type": "range",
-        "id": "card_shadow_vertical_offset",
-        "min": -40,
-        "max": 40,
-        "step": 2,
-        "unit": "px",
-        "label": "t:settings_schema.global.settings.vertical_offset.label",
-        "default": 0
-      },
-      {
-        "type": "range",
-        "id": "card_shadow_blur",
-        "min": 0,
-        "max": 40,
-        "step": 5,
-        "unit": "px",
-        "label": "t:settings_schema.global.settings.blur.label",
-        "default": 0
-      }
-    ]
-  },
-  {
-    "name": "t:settings_schema.content_containers.name",
-    "settings": [    
-      {
-        "type": "header",
-        "content": "t:settings_schema.global.settings.header__border.content"
-      },
-      {
-        "type": "range",
-        "id": "text_boxes_border_thickness",
-        "min": 0,
-        "max": 24,
-        "step": 1,
-        "unit": "px",
-        "label": "t:settings_schema.global.settings.thickness.label",
-        "default": 0
-      },
-      {
-        "type": "range",
-        "id": "text_boxes_border_opacity",
-        "min": 0,
-        "max": 100,
-        "step": 5,
-        "unit": "%",
-        "label": "t:settings_schema.global.settings.opacity.label",
-        "default": 0
-      },      
-      {
-        "type": "range",
-        "id": "text_boxes_radius",
-        "min": 0,
-        "max": 40,
-        "step": 2,
-        "unit": "px",
-        "label": "t:settings_schema.global.settings.corner_radius.label",
-        "default": 0
-      },
-      {
-        "type": "header",
-        "content": "t:settings_schema.global.settings.header__shadow.content"
-      },
-      {
-        "type": "range",
-        "id": "text_boxes_shadow_opacity",
-        "min": 0,
-        "max": 100,
-        "step": 5,
-        "unit": "%",
-        "label": "t:settings_schema.global.settings.opacity.label",
-        "default": 0
-      },
-      {
-        "type": "range",
-        "id": "text_boxes_shadow_horizontal_offset",
-        "min": -40,
-        "max": 40,
-        "step": 2,
-        "unit": "px",
-        "label": "t:settings_schema.global.settings.horizontal_offset.label",
-        "default": 0
-      },
-      {
-        "type": "range",
-        "id": "text_boxes_shadow_vertical_offset",
-        "min": -40,
-        "max": 40,
-        "step": 2,
-        "unit": "px",
-        "label": "t:settings_schema.global.settings.vertical_offset.label",
-        "default": 0
-      },
-      {
-        "type": "range",
-        "id": "text_boxes_shadow_blur",
-        "min": 0,
-        "max": 40,
-        "step": 5,
-        "unit": "px",
-        "label": "t:settings_schema.global.settings.blur.label",
-        "default": 0
-      }
-    ]
-  },
-  {
-    "name": "t:settings_schema.media.name",
+    "name": "t:settings_schema.grid_styles.name",
     "settings": [
       {
         "type": "header",
-        "content": "t:settings_schema.global.settings.header__border.content"
+        "content": "t:settings_schema.grid_styles.settings.header__section_styles.content"
       },
       {
         "type": "range",
-        "id": "media_border_thickness",
-        "min": 0,
-        "max": 24,
+        "id": "heading_font_size",
+        "min": 1,
+        "max": 8,
         "step": 1,
-        "unit": "px",
-        "label": "t:settings_schema.global.settings.thickness.label",
-        "default": 1
-      },
-      {
-        "type": "range",
-        "id": "media_border_opacity",
-        "min": 0,
-        "max": 100,
-        "step": 5,
-        "unit": "%",
-        "label": "t:settings_schema.global.settings.opacity.label",
-        "default": 5
-      },
-      {
-        "type": "range",
-        "id": "media_radius",
-        "min": 0,
-        "max": 40,
-        "step": 2,
-        "unit": "px",
-        "label": "t:settings_schema.global.settings.corner_radius.label",
-        "default": 0
-      },
-      {
-        "type": "header",
-        "content": "t:settings_schema.global.settings.header__shadow.content"
-      },
-      {
-        "type": "range",
-        "id": "media_shadow_opacity",
-        "min": 0,
-        "max": 100,
-        "step": 5,
-        "unit": "%",
-        "label": "t:settings_schema.global.settings.opacity.label",
-        "default": 0
-      },
-      {
-        "type": "range",
-        "id": "media_shadow_horizontal_offset",
-        "min": -40,
-        "max": 40,
-        "step": 2,
-        "unit": "px",
-        "label": "t:settings_schema.global.settings.horizontal_offset.label",
-        "default": 0
-      },
-      {
-        "type": "range",
-        "id": "media_shadow_vertical_offset",
-        "min": -40,
-        "max": 40,
-        "step": 2,
-        "unit": "px",
-        "label": "t:settings_schema.global.settings.vertical_offset.label",
-        "default": 0
-      },
-      {
-        "type": "range",
-        "id": "media_shadow_blur",
-        "min": 0,
-        "max": 40,
-        "step": 5,
-        "unit": "px",
-        "label": "t:settings_schema.global.settings.blur.label",
-        "default": 0
-      }
-    ]
-  },
-  {
-    "name": "t:settings_schema.popups.name",
-    "settings": [
-      {
-        "type": "paragraph",
-        "content": "t:settings_schema.popups.paragraph"
-      },
-      {
-        "type": "header",
-        "content": "t:settings_schema.global.settings.header__border.content"
-      },
-      {
-        "type": "range",
-        "id": "popup_border_thickness",
-        "min": 0,
-        "max": 24,
-        "step": 1,
-        "unit": "px",
-        "label": "t:settings_schema.global.settings.thickness.label",
-        "default": 1
-      },
-      {
-        "type": "range",
-        "id": "popup_border_opacity",
-        "min": 0,
-        "max": 100,
-        "step": 5,
-        "unit": "%",
-        "label": "t:settings_schema.global.settings.opacity.label",
-        "default": 10
-      },
-      {
-        "type": "range",
-        "id": "popup_corner_radius",
-        "min": 0,
-        "max": 40,
-        "step": 2,
-        "unit": "px",
-        "label": "t:settings_schema.global.settings.corner_radius.label",
-        "default": 0
-      },
-      {
-        "type": "header",
-        "content": "t:settings_schema.global.settings.header__shadow.content"
-      },
-      {
-        "type": "range",
-        "id": "popup_shadow_opacity",
-        "min": 0,
-        "max": 100,
-        "step": 5,
-        "unit": "%",
-        "label": "t:settings_schema.global.settings.opacity.label",
-        "default": 0
-      },
-      {
-        "type": "range",
-        "id": "popup_shadow_horizontal_offset",
-        "min": -40,
-        "max": 40,
-        "step": 2,
-        "unit": "px",
-        "label": "t:settings_schema.global.settings.horizontal_offset.label",
-        "default": 0
-      },
-      {
-        "type": "range",
-        "id": "popup_shadow_vertical_offset",
-        "min": -40,
-        "max": 40,
-        "step": 2,
-        "unit": "px",
-        "label": "t:settings_schema.global.settings.vertical_offset.label",
-        "default": 0
-      },
-      {
-        "type": "range",
-        "id": "popup_shadow_blur",
-        "min": 0,
-        "max": 40,
-        "step": 5,
-        "unit": "px",
-        "label": "t:settings_schema.global.settings.blur.label",
-        "default": 0
-      }
-    ]
-  },
-  {
-    "name": "t:settings_schema.drawers.name",
-    "settings": [
-      {
-        "type": "header",
-        "content": "t:settings_schema.global.settings.header__border.content"
-      },
-      {
-        "type": "range",
-        "id": "drawer_border_thickness",
-        "min": 0,
-        "max": 24,
-        "step": 1,
-        "unit": "px",
-        "label": "t:settings_schema.global.settings.thickness.label",
-        "default": 1
-      },
-      {
-        "type": "range",
-        "id": "drawer_border_opacity",
-        "min": 0,
-        "max": 100,
-        "step": 5,
-        "unit": "%",
-        "label": "t:settings_schema.global.settings.opacity.label",
-        "default": 10
-      },
-      {
-        "type": "header",
-        "content": "t:settings_schema.global.settings.header__shadow.content"
-      },
-      {
-        "type": "range",
-        "id": "drawer_shadow_opacity",
-        "min": 0,
-        "max": 100,
-        "step": 5,
-        "unit": "%",
-        "label": "t:settings_schema.global.settings.opacity.label",
-        "default": 0
-      },
-      {
-        "type": "range",
-        "id": "drawer_shadow_horizontal_offset",
-        "min": -40,
-        "max": 40,
-        "step": 2,
-        "unit": "px",
-        "label": "t:settings_schema.global.settings.horizontal_offset.label",
-        "default": 0
-      },
-      {
-        "type": "range",
-        "id": "drawer_shadow_vertical_offset",
-        "min": -40,
-        "max": 40,
-        "step": 2,
-        "unit": "px",
-        "label": "t:settings_schema.global.settings.vertical_offset.label",
-        "default": 0
-      },
-      {
-        "type": "range",
-        "id": "drawer_shadow_blur",
-        "min": 0,
-        "max": 40,
-        "step": 5,
-        "unit": "px",
-        "label": "t:settings_schema.global.settings.blur.label",
-        "default": 0
-      }
-    ]
-  },
-  {
-    "name": "t:settings_schema.badges.name",
-    "settings": [
-      {
-        "type": "select",
-        "id": "badge_position",
-        "options": [
-          {
-            "value": "bottom left",
-            "label": "t:settings_schema.badges.settings.position.options__1.label"
-          },
-          {
-            "value": "bottom right",
-            "label": "t:settings_schema.badges.settings.position.options__2.label"
-          },
-          {
-            "value": "top left",
-            "label": "t:settings_schema.badges.settings.position.options__3.label"
-          },
-          {
-            "value": "top right",
-            "label": "t:settings_schema.badges.settings.position.options__4.label"
-          }
-        ],
-        "default": "bottom left",
-        "label": "t:settings_schema.badges.settings.position.label"
-      },
-      {
-        "type": "range",
-        "id": "badge_corner_radius",
-        "min": 0,
-        "max": 40,
-        "step": 2,
-        "unit": "px",
-        "label": "t:settings_schema.global.settings.corner_radius.label",
-        "default": 40
+        "default": 3,
+        "label": "t:sections.common.settings.heading_font_size.label"
       },
       {
         "type": "select",
-        "id": "badge_sale_color_scheme",
+        "id": "heading_color",
+        "default": "primary",
+        "label": "t:sections.common.settings.heading_color.label",
         "options": [
           {
-            "value": "accent-1",
-            "label": "t:settings_schema.global.settings.color_scheme.options__1.label"
+            "value": "primary",
+            "label": "t:settings_schema.colors.settings.color_primary.label"
           },
           {
-            "value": "accent-2",
-            "label": "t:settings_schema.global.settings.color_scheme.options__2.label"
+            "value": "secondary",
+            "label": "t:settings_schema.colors.settings.color_secondary.label"
           },
           {
-            "value": "background-2",
-            "label": "t:settings_schema.global.settings.color_scheme.options__4.label"
+            "value": "accent",
+            "label": "t:settings_schema.colors.settings.color_accent.label"
+          },
+          {
+            "value": "background-primary",
+            "label": "t:settings_schema.colors.settings.color_background_primary.label"
+          },
+          {
+            "value": "background-secondary",
+            "label": "t:settings_schema.colors.settings.color_background_secondary.label"
+          },
+          {
+            "value": "text-primary",
+            "label": "t:settings_schema.colors.settings.color_text_primary.label"
+          },
+          {
+            "value": "text-secondary",
+            "label": "t:settings_schema.colors.settings.color_text_secondary.label"
+          },
+          {
+            "value": "border",
+            "label": "t:settings_schema.colors.settings.color_border.label"
           }
-        ],
-        "default": "accent-2",
-        "label": "t:settings_schema.badges.settings.badge_sale_color_scheme.label"
+        ]
+      },
+      {
+        "type": "range",
+        "id": "subheading_font_size",
+        "min": 1,
+        "max": 8,
+        "step": 1,
+        "default": 2,
+        "label": "t:sections.common.settings.subheading_font_size.label"
       },
       {
         "type": "select",
-        "id": "badge_sold_out_color_scheme",
+        "id": "subheading_color",
+        "default": "secondary",
+        "label": "t:sections.common.settings.subheading_color.label",
         "options": [
           {
-            "value": "background-1",
-            "label": "t:settings_schema.global.settings.color_scheme.options__3.label"
+            "value": "primary",
+            "label": "t:settings_schema.colors.settings.color_primary.label"
           },
           {
-            "value": "inverse",
-            "label": "t:settings_schema.global.settings.color_scheme.options__5.label"
+            "value": "secondary",
+            "label": "t:settings_schema.colors.settings.color_secondary.label"
+          },
+          {
+            "value": "accent",
+            "label": "t:settings_schema.colors.settings.color_accent.label"
+          },
+          {
+            "value": "background-primary",
+            "label": "t:settings_schema.colors.settings.color_background_primary.label"
+          },
+          {
+            "value": "background-secondary",
+            "label": "t:settings_schema.colors.settings.color_background_secondary.label"
+          },
+          {
+            "value": "text-primary",
+            "label": "t:settings_schema.colors.settings.color_text_primary.label"
+          },
+          {
+            "value": "text-secondary",
+            "label": "t:settings_schema.colors.settings.color_text_secondary.label"
+          },
+          {
+            "value": "border",
+            "label": "t:settings_schema.colors.settings.color_border.label"
           }
-        ],
-        "default": "inverse",
-        "label": "t:settings_schema.badges.settings.badge_sold_out_color_scheme.label"
+        ]
+      },
+      {
+        "type": "select",
+        "id": "section_background_color",
+        "default": "transparent",
+        "label": "t:sections.common.settings.background_color.label",
+        "options": [
+          {
+            "value": "transparent",
+            "label": "t:settings_schema.colors.settings.color_transparent.label"
+          },
+          {
+            "value": "primary",
+            "label": "t:settings_schema.colors.settings.color_primary.label"
+          },
+          {
+            "value": "secondary",
+            "label": "t:settings_schema.colors.settings.color_secondary.label"
+          },
+          {
+            "value": "accent",
+            "label": "t:settings_schema.colors.settings.color_accent.label"
+          },
+          {
+            "value": "background-primary",
+            "label": "t:settings_schema.colors.settings.color_background_primary.label"
+          },
+          {
+            "value": "background-secondary",
+            "label": "t:settings_schema.colors.settings.color_background_secondary.label"
+          },
+          {
+            "value": "text-primary",
+            "label": "t:settings_schema.colors.settings.color_text_primary.label"
+          },
+          {
+            "value": "text-secondary",
+            "label": "t:settings_schema.colors.settings.color_text_secondary.label"
+          },
+          {
+            "value": "border",
+            "label": "t:settings_schema.colors.settings.color_border.label"
+          }
+        ]
+      },
+      {
+        "type": "checkbox",
+        "id": "section_shadow",
+        "default": false,
+        "label": "t:sections.common.settings.shadow.label"
+      },
+      {
+        "type": "checkbox",
+        "id": "section_rounded",
+        "default": false,
+        "label": "t:sections.common.settings.rounded.label"
+      },
+      {
+        "type": "range",
+        "id": "grid_gap",
+        "min": 0,
+        "max": 12,
+        "step": 1,
+        "default": 4,
+        "label": "t:sections.common.settings.grid_gap.label"
+      },
+      {
+        "type": "range",
+        "id": "section_margin",
+        "min": 0,
+        "max": 12,
+        "step": 1,
+        "default": 0,
+        "label": "t:sections.common.settings.margin.label"
+      },
+      {
+        "type": "range",
+        "id": "section_padding",
+        "min": 0,
+        "max": 12,
+        "step": 1,
+        "default": 4,
+        "label": "t:sections.common.settings.padding.label"
+      },
+      {
+        "type": "header",
+        "content": "t:settings_schema.grid_styles.settings.header__card_styles.content"
+      },
+      {
+        "type": "range",
+        "id": "card_heading_font_size",
+        "min": 1,
+        "max": 8,
+        "step": 1,
+        "default": 2,
+        "label": "t:sections.common.settings.heading_font_size.label"
+      },
+      {
+        "type": "select",
+        "id": "card_heading_color",
+        "default": "primary",
+        "label": "t:sections.common.settings.heading_color.label",
+        "options": [
+          {
+            "value": "primary",
+            "label": "t:settings_schema.colors.settings.color_primary.label"
+          },
+          {
+            "value": "secondary",
+            "label": "t:settings_schema.colors.settings.color_secondary.label"
+          },
+          {
+            "value": "accent",
+            "label": "t:settings_schema.colors.settings.color_accent.label"
+          },
+          {
+            "value": "background-primary",
+            "label": "t:settings_schema.colors.settings.color_background_primary.label"
+          },
+          {
+            "value": "background-secondary",
+            "label": "t:settings_schema.colors.settings.color_background_secondary.label"
+          },
+          {
+            "value": "text-primary",
+            "label": "t:settings_schema.colors.settings.color_text_primary.label"
+          },
+          {
+            "value": "text-secondary",
+            "label": "t:settings_schema.colors.settings.color_text_secondary.label"
+          },
+          {
+            "value": "border",
+            "label": "t:settings_schema.colors.settings.color_border.label"
+          }
+        ]
+      },
+      {
+        "type": "range",
+        "id": "card_content_font_size",
+        "min": 1,
+        "max": 8,
+        "step": 1,
+        "default": 1,
+        "label": "t:sections.common.settings.content_font_size.label"
+      },
+      {
+        "type": "select",
+        "id": "card_content_color",
+        "default": "text-primary",
+        "label": "t:sections.common.settings.content_color.label",
+        "options": [
+          {
+            "value": "primary",
+            "label": "t:settings_schema.colors.settings.color_primary.label"
+          },
+          {
+            "value": "secondary",
+            "label": "t:settings_schema.colors.settings.color_secondary.label"
+          },
+          {
+            "value": "accent",
+            "label": "t:settings_schema.colors.settings.color_accent.label"
+          },
+          {
+            "value": "background-primary",
+            "label": "t:settings_schema.colors.settings.color_background_primary.label"
+          },
+          {
+            "value": "background-secondary",
+            "label": "t:settings_schema.colors.settings.color_background_secondary.label"
+          },
+          {
+            "value": "text-primary",
+            "label": "t:settings_schema.colors.settings.color_text_primary.label"
+          },
+          {
+            "value": "text-secondary",
+            "label": "t:settings_schema.colors.settings.color_text_secondary.label"
+          },
+          {
+            "value": "border",
+            "label": "t:settings_schema.colors.settings.color_border.label"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "card_background_color",
+        "default": "transparent",
+        "label": "t:sections.common.settings.background_color.label",
+        "options": [
+          {
+            "value": "transparent",
+            "label": "t:settings_schema.colors.settings.color_transparent.label"
+          },
+          {
+            "value": "primary",
+            "label": "t:settings_schema.colors.settings.color_primary.label"
+          },
+          {
+            "value": "secondary",
+            "label": "t:settings_schema.colors.settings.color_secondary.label"
+          },
+          {
+            "value": "accent",
+            "label": "t:settings_schema.colors.settings.color_accent.label"
+          },
+          {
+            "value": "background-primary",
+            "label": "t:settings_schema.colors.settings.color_background_primary.label"
+          },
+          {
+            "value": "background-secondary",
+            "label": "t:settings_schema.colors.settings.color_background_secondary.label"
+          },
+          {
+            "value": "text-primary",
+            "label": "t:settings_schema.colors.settings.color_text_primary.label"
+          },
+          {
+            "value": "text-secondary",
+            "label": "t:settings_schema.colors.settings.color_text_secondary.label"
+          },
+          {
+            "value": "border",
+            "label": "t:settings_schema.colors.settings.color_border.label"
+          }
+        ]
+      },
+      {
+        "type": "checkbox",
+        "id": "card_shadow",
+        "default": false,
+        "label": "t:sections.common.settings.shadow.label"
+      },
+      {
+        "type": "checkbox",
+        "id": "card_rounded",
+        "default": false,
+        "label": "t:sections.common.settings.rounded.label"
+      },
+      {
+        "type": "range",
+        "id": "card_margin",
+        "min": 0,
+        "max": 12,
+        "step": 1,
+        "default": 0,
+        "label": "t:sections.common.settings.margin.label"
+      },
+      {
+        "type": "range",
+        "id": "card_padding",
+        "min": 0,
+        "max": 12,
+        "step": 1,
+        "default": 4,
+        "label": "t:sections.common.settings.padding.label"
       }
     ]
   },
   {
     "name": "t:settings_schema.styles.name",
     "settings": [
+      {
+        "type": "header",
+        "content": "t:settings_schema.styles.settings.header__1.content"
+      },
+      {
+        "type": "select",
+        "id": "sale_badge_color_scheme",
+        "options": [
+          {
+            "value": "accent-1",
+            "label": "t:settings_schema.styles.settings.sale_badge_color_scheme.options__2.label"
+          },
+          {
+            "value": "accent-2",
+            "label": "t:settings_schema.styles.settings.sale_badge_color_scheme.options__3.label"
+          },
+          {
+            "value": "background-2",
+            "label": "t:settings_schema.styles.settings.sale_badge_color_scheme.options__1.label"
+          }
+        ],
+        "default": "accent-2",
+        "label": "t:settings_schema.styles.settings.sale_badge_color_scheme.label"
+      },
+      {
+        "type": "select",
+        "id": "sold_out_badge_color_scheme",
+        "options": [
+          {
+            "value": "background-1",
+            "label": "t:settings_schema.styles.settings.sold_out_badge_color_scheme.options__1.label"
+          },
+          {
+            "value": "inverse",
+            "label": "t:settings_schema.styles.settings.sold_out_badge_color_scheme.options__2.label"
+          }
+        ],
+        "default": "inverse",
+        "label": "t:settings_schema.styles.settings.sold_out_badge_color_scheme.label"
+      },
+      {
+        "type": "header",
+        "content": "t:settings_schema.styles.settings.header__2.content"
+      },
       {
         "type": "select",
         "id": "accent_icons",
@@ -1092,35 +875,6 @@
     ]
   },
   {
-    "name": "t:settings_schema.search_input.name",
-    "settings": [
-      {
-        "type": "header",
-        "content": "t:settings_schema.search_input.settings.header.content"
-      },
-      {
-        "type": "checkbox",
-        "id": "predictive_search_enabled",
-        "default": true,
-        "label": "t:settings_schema.search_input.settings.predictive_search_enabled.label"
-      },
-      {
-        "type": "checkbox",
-        "id": "predictive_search_show_vendor",
-        "default": false,
-        "label": "t:settings_schema.search_input.settings.predictive_search_show_vendor.label",
-        "info": "t:settings_schema.search_input.settings.predictive_search_show_vendor.info"
-      },
-      {
-        "type": "checkbox",
-        "id": "predictive_search_show_price",
-        "default": true,
-        "label": "t:settings_schema.search_input.settings.predictive_search_show_price.label",
-        "info": "t:settings_schema.search_input.settings.predictive_search_show_price.info"
-      }
-    ]
-  },
-  {
     "name": "t:settings_schema.favicon.name",
     "settings": [
       {
@@ -1128,25 +882,6 @@
         "id": "favicon",
         "label": "t:settings_schema.favicon.settings.favicon.label",
         "info": "t:settings_schema.favicon.settings.favicon.info"
-      }
-    ]
-  },
-  {
-    "name": "t:settings_schema.currency_format.name",
-    "settings": [
-      {
-        "type": "header",
-        "content": "t:settings_schema.currency_format.settings.content"
-      },
-      {
-        "type": "paragraph",
-        "content": "t:settings_schema.currency_format.settings.paragraph"
-      },
-      {
-        "type": "checkbox",
-        "id": "currency_code_enabled",
-        "label": "t:settings_schema.currency_format.settings.currency_code_enabled.label",
-        "default": true
       }
     ]
   }

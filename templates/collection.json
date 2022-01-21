@@ -1,10 +1,48 @@
 {
   "sections": {
     "banner": {
-      "type": "main-collection-banner"
+      "type": "main-collection-banner",
+      "settings": {
+        "show_collection_description": false,
+        "show_collection_image": false
+      }
     },
     "product-grid": {
-      "type": "main-collection-product-grid"
+      "type": "main-collection-product-grid",
+      "settings": {
+        "heading": "Featured collection",
+        "subheading": "",
+        "image_ratio": "adapt",
+        "show_secondary_image": false,
+        "add_image_padding": false,
+        "show_image_outline": true,
+        "show_rating": false,
+        "enable_filtering": false,
+        "enable_sorting": true,
+        "limit": 12,
+        "columns": 3,
+        "show_view_all": true,
+        "show_vendor": false,
+        "heading_font_size": "base",
+        "heading_color": "primary",
+        "subheading_font_size": "sm",
+        "subheading_color": "primary",
+        "section_background_color": "transparent",
+        "section_shadow": false,
+        "section_rounded": false,
+        "grid_gap": 4,
+        "section_margin": 0,
+        "section_padding": 4,
+        "card_heading_font_size": 2,
+        "card_heading_color": "text-primary",
+        "card_content_font_size": 6,
+        "card_content_color": "text-primary",
+        "card_background_color": "background-secondary",
+        "card_shadow": true,
+        "card_rounded": true,
+        "card_margin": 0,
+        "card_padding": 4
+      }
     }
   },
   "order": [

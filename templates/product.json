@@ -6,37 +6,82 @@
         "vendor": {
           "type": "text",
           "settings": {
+            "text": "{{ product.vendor }}",
+            "font_size": 2,
+            "color": "text-primary",
             "text_style": "uppercase",
-            "text": "{{ product.vendor }}"
+            "vertical_padding": 2
           }
         },
         "title": {
-          "type": "title"
+          "type": "title",
+          "settings": {
+            "font_size": 3,
+            "color": "primary",
+            "vertical_padding": 2
+          }
         },
-        "caption": {
+        "subtitle": {
           "type": "text",
           "settings": {
             "text": "{{ product.metafields.descriptors.subtitle.value }}",
-            "text_style": "subtitle"
+            "font_size": 2,
+            "color": "text-primary",
+            "text_style": "subtitle",
+            "vertical_padding": 2
           }
         },
         "price": {
-          "type": "price"
+          "type": "price",
+          "settings": {
+          }
         },
-        "variant_picker": {
-          "type": "variant_picker"
-        },
-        "quantity_selector": {
-          "type": "quantity_selector"
-        },
-        "buy_buttons": {
-          "type": "buy_buttons"
+        "49b64c0d-53cb-45b2-8fbf-7bab0c0b0721": {
+          "type": "add_to_cart_form",
+          "settings": {
+            "show_dynamic_checkout": false,
+            "wide_buttons": true,
+            "show_quantity_selector": true,
+            "picker_type": "button",
+            "input_background_color": "background-secondary",
+            "input_color": "text-secondary"
+          }
         },
         "description": {
-          "type": "description"
+          "type": "description",
+          "settings": {
+            "show_share": false,
+            "font_size": 3,
+            "color": "text-primary",
+            "vertical_padding": 2
+          }
         },
-        "share": {
-          "type": "share"
+        "74c51a43-772b-4810-b49d-d31a76575887": {
+          "type": "tracklist",
+          "settings": {
+            "heading": "Tracklist",
+            "heading_font_size": "base",
+            "heading_color": "primary",
+            "content_font_size": "base",
+            "content_color": "accent",
+            "vertical_padding": 2,
+            "track_number_suffix": ".",
+            "display": "collapsible_tab"
+          }
+        },
+        "a9ce64b6-b704-44e2-80f7-8df968f7a887": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Size Chart",
+            "heading_font_size": 3,
+            "heading_color": "primary",
+            "content": "",
+            "content_font_size": 6,
+            "content_color": "accent",
+            "vertical_padding": 10,
+            "page": "size-chart-table",
+            "icon": "none"
+          }
         }
       },
       "block_order": [
@@ -44,15 +89,49 @@
         "title",
         "subtitle",
         "price",
-        "variant_picker",
-        "quantity_selector",
-        "buy_buttons",
+        "49b64c0d-53cb-45b2-8fbf-7bab0c0b0721",
         "description",
-        "share"
-      ]
+        "74c51a43-772b-4810-b49d-d31a76575887",
+        "a9ce64b6-b704-44e2-80f7-8df968f7a887"
+      ],
+      "settings": {
+        "layout": "images_left",
+        "enable_sticky_info": true,
+        "enable_video_looping": false
+      }
     },
     "product-recommendations": {
-      "type": "product-recommendations"
+      "type": "product-recommendations",
+      "settings": {
+        "heading": "You may also like",
+        "subheading": "really cool subheading",
+        "limit": 3,
+        "columns": 3,
+        "show_view_all": true,
+        "show_vendor": false,
+        "heading_font_size": "base",
+        "heading_color": "text-primary",
+        "subheading_font_size": "sm",
+        "subheading_color": "secondary",
+        "section_background_color": "transparent",
+        "section_shadow": false,
+        "section_rounded": false,
+        "grid_gap": 4,
+        "section_margin": 0,
+        "section_padding": 4,
+        "card_heading_font_size": 2,
+        "card_heading_color": "primary",
+        "card_content_font_size": 1,
+        "card_content_color": "text-primary",
+        "card_background_color": "transparent",
+        "card_shadow": false,
+        "card_rounded": false,
+        "card_margin": 0,
+        "card_padding": 4,
+        "image_ratio": "adapt",
+        "show_secondary_image": false,
+        "add_image_padding": false
+      }
     }
   },
   "order": [

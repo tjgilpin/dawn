@@ -1,63 +1,73 @@
 {
-  "current": "Default",
-  "presets": {
-    "Default": {
-      "colors_solid_button_labels": "#FFFFFF",
-      "colors_accent_1": "#121212",
-      "colors_accent_2": "#334FB4",
-      "colors_text": "#121212",
-      "colors_outline_button_labels": "#121212",
-      "colors_background_1": "#FFFFFF",
-      "colors_background_2": "#F3F3F3",
-      "type_header_font": "assistant_n4",
-      "type_body_font": "assistant_n4",
-      "sections": {
-        "announcement-bar": {
-          "type": "announcement-bar",
-          "blocks": {
-            "announcement-bar-0": {
-              "type": "announcement",
-              "settings": {
-                "color_scheme": "background-1"
-              }
+  "current": {
+    "container_width_md": "900px",
+    "color_primary": "#ea0000",
+    "color_secondary": "#e4e4e4",
+    "color_text_primary": "#ffffff",
+    "color_text_secondary": "#afafb2",
+    "color_background_primary": "#171717",
+    "color_background_secondary": "#212121",
+    "type_font_size_xs": "0.75rem",
+    "type_line_height_xs": ".75rem",
+    "type_font_size_sm": "1rem",
+    "type_line_height_sm": "1rem",
+    "type_font_size_base": "1.25rem",
+    "type_line_height_base": "1.25rem",
+    "type_font_size_lg": "1.375rem",
+    "type_line_height_lg": "1.5rem",
+    "type_font_size_xl": "2rem",
+    "type_line_height_xl": "2.25rem",
+    "type_font_size_2xl": "2.5rem",
+    "type_line_height_2xl": "3rem",
+    "type_font_size_3xl": "3.25rem",
+    "type_font_size_4xl": "4rem",
+    "type_line_height_4xl": "4.5rem",
+    "container_width_lg": "1200px",
+    "color_text": "#231f20",
+    "sections": {
+      "announcement-bar": {
+        "type": "announcement-bar",
+        "blocks": {
+          "announcement-bar-0": {
+            "type": "announcement",
+            "settings": {
+              "text": "Welcome to our store",
+              "color_scheme": "accent-1",
+              "link": ""
             }
-          },
-          "block_order": [
-            "announcement-bar-0"
-          ]
+          }
+        },
+        "block_order": [
+          "announcement-bar-0"
+        ],
+        "settings": {
+        }
+      },
+      "header": {
+        "type": "header",
+        "settings": {
+          "logo_width": 100,
+          "logo_position": "middle-left",
+          "menu": "main-menu",
+          "show_line_separator": true,
+          "enable_sticky_header": true
+        }
+      },
+      "footer": {
+        "type": "footer",
+        "settings": {
+          "color_scheme": "background-1",
+          "newsletter_enable": false,
+          "newsletter_heading": "Sign up to our emails",
+          "show_social": false,
+          "enable_country_selector": true,
+          "enable_language_selector": true,
+          "payment_enable": true
         }
       }
     },
-    "Craft": {
-      "colors_solid_button_labels": "#EFECEC",
-      "colors_accent_1": "#2A332F",
-      "colors_accent_2": "#476154",
-      "colors_text": "#1C1A1A",
-      "colors_outline_button_labels": "#7B8382",
-      "colors_background_1": "#EFECEC",
-      "colors_background_2": "#C1BCAE",
-      "type_header_font": "americana_n4",
-      "type_body_font": "quattrocento_sans_n4",
-      "sections": {
-        "footer": {
-          "type": "footer",
-          "settings": {
-            "color_scheme": "accent-1"
-          },
-          "blocks": {
-            "menu": {
-              "type": "link_list"
-            },
-            "text": {
-              "type": "text"
-            }
-          },
-          "block_order": [
-            "menu",
-            "text"
-          ]
-        }
-      }
-    }
+    "content_for_index": [
+
+    ]
   }
 }
